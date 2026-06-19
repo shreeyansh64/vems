@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vems/features/auth/presentation/register_page.dart';
 
-void main() {
+void main () {
   runApp(const MyApp());
 }
 
@@ -10,8 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vems',
-      home: Container(),
+      title: 'VEMS',
+      home: const RegisterPage(),
     );
   }
 }
