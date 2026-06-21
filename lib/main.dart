@@ -7,6 +7,7 @@ import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
 import 'package:vems/features/auth/presentation/pages/register_email.dart';
 import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
+import 'package:vems/features/vehicle/presentation/pages/vehicle_submit_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<ProfileBloc>()),
         BlocProvider(create: (_) => getIt<VehicleBloc>()),
       ],
-      child: MaterialApp(title: 'VEMS', home: const RegisterEmail()),
+      child: MaterialApp(title: 'VEMS', home: const VehicleSubmitPage()),
     );
   }
 }
