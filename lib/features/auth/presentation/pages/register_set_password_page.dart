@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
 import 'package:vems/features/auth/presentation/pages/dashboard.dart';
+import 'package:vems/features/auth/presentation/pages/login_page.dart';
 
 class RegisterSetPasswordPage extends StatefulWidget {
   const RegisterSetPasswordPage({super.key});
@@ -36,7 +37,7 @@ class _RegisterSetPasswordPageState extends State<RegisterSetPasswordPage> {
             MaterialPageRoute(
               builder: (_) => BlocProvider.value(
                 value: context.read<RegisterBloc>(),
-                child: Dashboard(),
+                child: LoginPage(),
               ),
             ),
           );

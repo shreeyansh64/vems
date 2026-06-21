@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
+import 'package:vems/features/auth/presentation/pages/dashboard.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,13 +12,97 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool obscurePassword = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Login Page"),
-        centerTitle: true,
-      ),
+    return BlocConsumer<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state.status == LoginStatus.success) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                value: context.read<LoginBloc>(),
+                child: Dashboard(),
+              ),
+            ),
+          );
+        } else if (state.status == LoginStatus.error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.error ?? "Something went wrong")),
+          );
+        }
+      },
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            appBar: AppBar(title: Text("Login"), centerTitle: true),
+            body: Center(
+              child: state.status == LoginStatus.loading
+                  ? CupertinoActivityIndicator()
+                  : Column(
+                      children: <Widget>[
+                        TextFormField(
+                          controller: emailController,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Email required";
+                            }
+                            if (!value.endsWith("@akgec.ac.in")) {
+                              return "Only @akgec.ac.in allowed";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(label: Text("Email")),
+                        ),
+                        SizedBox(height: 30),
+                        TextFormField(
+                          controller: passwordController,
+                          obscureText: obscurePassword,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Password required";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            label: Text("Password"),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  obscurePassword = !obscurePassword;
+                                });
+                              },
+                              icon: obscurePassword
+                                  ? Icon(Icons.visibility_off)
+                                  : Icon(Icons.visibility),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                        ElevatedButton(
+                          onPressed: () {
+                            context.read<LoginBloc>().add(
+                              RequestLoginEvent(
+                                email: emailController.text.trim(),
+                                password: passwordController.text.trim(),
+                              ),
+                            );
+                          },
+                          child: Text("Log in"),
+                        ),
+                      ],
+                    ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
