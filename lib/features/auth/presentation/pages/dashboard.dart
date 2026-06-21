@@ -7,7 +7,7 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("Welcome !!"),
+        child: Text("Yaha tak chalra to call kr diyo"),
       ),
     );
   }

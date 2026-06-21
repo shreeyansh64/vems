@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:vems/features/auth/presentation/pages/dashboard.dart';
 import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:vems/features/vehicle/presentation/pages/vehicle_submit_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -58,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   builder: (context) {
                     return BlocProvider.value(
                       value: context.read<ProfileBloc>(),
-                      child: Dashboard(),
+                      child: VehicleSubmitPage(),
                     );
                   },
                 ),
