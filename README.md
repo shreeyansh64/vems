@@ -8,5 +8,3 @@ Roles supported:
 - Student: register and manage vehicle
 - Staff: verify vehicles via scanner
 - Admin: approve/reject registrations
-
-Backend uses JWT authentication and role-based access.
