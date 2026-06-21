@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:vems/core/dependency_injection.dart';
+import 'package:vems/core/di/injection.dart';
 import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
-import 'package:vems/features/auth/presentation/pages/login_page.dart';
 import 'package:vems/features/auth/presentation/pages/register_email.dart';
 import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:vems/features/profile/presentation/pages/profile_page.dart';
 import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
 
 void main() async {
