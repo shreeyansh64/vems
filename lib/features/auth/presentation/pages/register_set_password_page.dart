@@ -33,7 +33,12 @@ class _RegisterSetPasswordPageState extends State<RegisterSetPasswordPage> {
         if (state.status == RegisterStatus.setPassword) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => Dashboard()),
+            MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                value: context.read<RegisterBloc>(),
+                child: Dashboard(),
+              ),
+            ),
           );
         } else if (state.status == RegisterStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(

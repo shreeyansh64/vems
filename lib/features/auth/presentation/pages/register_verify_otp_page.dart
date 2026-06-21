@@ -27,11 +27,18 @@ class _RegisterVerifyOtpPageState extends State<RegisterVerifyOtpPage> {
         if (state.status == RegisterStatus.verifyOtp) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => RegisterSetPasswordPage()),
+            MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                value: context.read<RegisterBloc>(),
+                child: RegisterSetPasswordPage(),
+              ),
+            ),
           );
         } else if (state.status == RegisterStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.errorMessage ?? 'Something went wrong')),
+            SnackBar(
+              content: Text(state.errorMessage ?? 'Something went wrong'),
+            ),
           );
         }
       },
@@ -48,7 +55,9 @@ class _RegisterVerifyOtpPageState extends State<RegisterVerifyOtpPage> {
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Enter the OTP sent to ${context.read<RegisterBloc>().state.email}"),
+                          Text(
+                            "Enter the OTP sent to ${context.read<RegisterBloc>().state.email}",
+                          ),
                           SizedBox(height: 24),
                           Pinput(
                             length: 6,
@@ -56,7 +65,10 @@ class _RegisterVerifyOtpPageState extends State<RegisterVerifyOtpPage> {
                             onCompleted: (otp) {
                               context.read<RegisterBloc>().add(
                                 VerifyOtpEvent(
-                                  email: context.read<RegisterBloc>().state.email!,
+                                  email: context
+                                      .read<RegisterBloc>()
+                                      .state
+                                      .email!,
                                   otp: otp,
                                 ),
                               );

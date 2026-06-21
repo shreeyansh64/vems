@@ -15,13 +15,24 @@ class _RegisterEmailState extends State<RegisterEmail> {
   final TextEditingController emailController = TextEditingController();
 
   @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state.status == RegisterStatus.otpSent) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => RegisterVerifyOtpPage()),
+            MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                value: context.read<RegisterBloc>(),
+                child: RegisterVerifyOtpPage(),
+              ),
+            ),
           );
         } else if (state.status == RegisterStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -50,7 +61,18 @@ class _RegisterEmailState extends State<RegisterEmail> {
                           TextFormField(
                             controller: emailController,
                             keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(hintText: 'Email'),
+                            decoration: InputDecoration(label: Text("Email")),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Email required';
+                              }
+                              if (!value.endsWith('@akgec.ac.in')) {
+                                return 'Only @akgec.ac.in allowed';
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(height: 20),
                           ElevatedButton(

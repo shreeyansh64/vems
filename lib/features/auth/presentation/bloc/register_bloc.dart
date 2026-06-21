@@ -10,6 +10,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc({required this.registerRepository})
     : super(RegisterState.initial()) {
     on<GetOTPEvent>(onGetOTPEvent);
+    on<VerifyOtpEvent>(onVerifyOtpEvent);
+    on<SetPasswordEvent>(onSetPasswordEvent);
   }
 
   Future onGetOTPEvent(GetOTPEvent event, Emitter<RegisterState> emit) async {
