@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:vems/core/api/api_client.dart';
 import 'package:vems/features/auth/data/data_source/register_remote.dart';
@@ -8,11 +10,18 @@ import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
 var getIt = GetIt.instance;
 
 void setup() {
-  getIt.registerSingleton(ApiClient);
-  getIt.registerSingleton(getIt<ApiClient>().getDio());
-  getIt.registerLazySingleton(() => RegisterRemote(dio: getIt()));
+  getIt.registerLazySingleton<FlutterSecureStorage>(
+    () => const FlutterSecureStorage(),
+  );
+  getIt.registerLazySingleton<ApiClient>(() => ApiClient(storage: getIt()));
+  getIt.registerLazySingleton<Dio>(() => getIt<ApiClient>().getDio());
+  getIt.registerLazySingleton<RegisterRemote>(
+    () => RegisterRemote(dio: getIt()),
+  );
   getIt.registerLazySingleton<RegisterRepository>(
     () => RegisterRepositoryImpl(registerRemote: getIt()),
   );
-  getIt.registerFactory(() => RegisterBloc(registerRepository: getIt()));
+  getIt.registerFactory<RegisterBloc>(
+    () => RegisterBloc(registerRepository: getIt()),
+  );
 }

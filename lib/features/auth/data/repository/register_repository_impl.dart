@@ -6,8 +6,18 @@ class RegisterRepositoryImpl implements RegisterRepository {
   RegisterRepositoryImpl({required this.registerRemote});
 
   @override
-  Future<String> GetOTP(String email) {
-    return registerRemote.GetOTP(email);
+  Future<String> getOtp(String email) {
+    return registerRemote.getOtp(email);
+  }
+
+  @override
+  Future<String> setPassword(String email, String password) {
+    return registerRemote.setPassword(email, password);
+  }
+  
+  @override
+  Future<String> verifyOtp(String email, String otp) {
+    return registerRemote.verifyOtp(email, otp);
   }
   
 }

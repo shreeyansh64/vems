@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vems/core/dependency_injection.dart';
-import 'package:vems/features/auth/presentation/register_page.dart';
+import 'package:vems/features/auth/presentation/pages/register_email.dart';
 
 void main () {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'VEMS',
-      home: const RegisterPage(),
+      home: const RegisterEmail(),
     );
   }
 }
