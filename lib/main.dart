@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<LoginBloc>()),
         BlocProvider(create: (_) => getIt<ProfileBloc>()),
       ],
-      child: MaterialApp(title: 'VEMS', home: const ProfilePage()),
+      child: MaterialApp(title: 'VEMS', home: const RegisterEmail()),
     );
   }
 }
