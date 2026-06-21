@@ -25,7 +25,9 @@ class _RegisterEmailState extends State<RegisterEmail> {
           );
         } else if (state.status == RegisterStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.errorMessage ?? 'Something went wrong')),
+            SnackBar(
+              content: Text(state.errorMessage ?? 'Something went wrong'),
+            ),
           );
         }
       },
@@ -33,7 +35,10 @@ class _RegisterEmailState extends State<RegisterEmail> {
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
-            appBar: AppBar(centerTitle: true, title: const Text('Register Page')),
+            appBar: AppBar(
+              centerTitle: true,
+              title: const Text('Register Page'),
+            ),
             body: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Center(
