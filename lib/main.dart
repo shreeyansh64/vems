@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<ProfileBloc>()),
         BlocProvider(create: (_) => getIt<VehicleBloc>()),
       ],
-      child: MaterialApp(title: 'VEMS', home: const ProfilePage()),
+      child: MaterialApp(title: 'VEMS', home: const RegisterEmail()),
     );
   }
 }
