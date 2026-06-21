@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:vems/features/auth/presentation/pages/login_page.dart';
 
 class ApiClient {
   final FlutterSecureStorage storage;
@@ -33,7 +35,7 @@ class ApiClient {
               return handler.resolve(retryResponse);
             } else {
               await _clearTokens();
-              // Login screen
+              // Login Page
             }
           }
           return handler.next(error);
@@ -61,12 +63,11 @@ class ApiClient {
       return false;
     }
   }
-  
+
   Future<Response> _retry(Dio dio, RequestOptions requestOptions) async {
     final token = await storage.read(key: 'access_token');
     requestOptions.headers['Authorization'] = 'Bearer $token';
     return await dio.fetch(requestOptions);
-
   }
 
   Future<void> _clearTokens() async {
