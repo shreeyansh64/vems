@@ -1,3 +1,5 @@
+part of 'login_bloc.dart';
+
 enum LoginStatus { initial, loading, success, error }
 
 class LoginState {
