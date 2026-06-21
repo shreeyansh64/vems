@@ -94,6 +94,15 @@ class _RegisterSetPasswordPageState extends State<RegisterSetPasswordPage> {
                           ),
                           ElevatedButton(
                             onPressed: () {
+                              if (passwordController.text.trim() !=
+                                  confirmPasswordController.text.trim()) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("Passwords don't match"),
+                                  ),
+                                );
+                                return;
+                              }
                               context.read<RegisterBloc>().add(
                                 SetPasswordEvent(
                                   email: state.email!,
