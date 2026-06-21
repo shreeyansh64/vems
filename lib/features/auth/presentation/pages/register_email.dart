@@ -77,6 +77,9 @@ class _RegisterEmailState extends State<RegisterEmail> {
                           SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () {
+                              if (emailController.text.isEmpty) {
+                                return ;
+                              }
                               context.read<RegisterBloc>().add(
                                 GetOTPEvent(email: emailController.text.trim()),
                               );

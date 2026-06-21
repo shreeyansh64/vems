@@ -41,64 +41,70 @@ class _LoginPageState extends State<LoginPage> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             appBar: AppBar(title: Text("Login"), centerTitle: true),
-            body: Center(
-              child: state.status == LoginStatus.loading
-                  ? CupertinoActivityIndicator()
-                  : Column(
-                      children: <Widget>[
-                        TextFormField(
-                          controller: emailController,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Email required";
-                            }
-                            if (!value.endsWith("@akgec.ac.in")) {
-                              return "Only @akgec.ac.in allowed";
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(label: Text("Email")),
-                        ),
-                        SizedBox(height: 30),
-                        TextFormField(
-                          controller: passwordController,
-                          obscureText: obscurePassword,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Password required";
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            label: Text("Password"),
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  obscurePassword = !obscurePassword;
-                                });
-                              },
-                              icon: obscurePassword
-                                  ? Icon(Icons.visibility_off)
-                                  : Icon(Icons.visibility),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Center(
+                child: state.status == LoginStatus.loading
+                    ? CupertinoActivityIndicator()
+                    : Column(
+                        children: <Widget>[
+                          TextFormField(
+                            controller: emailController,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Email required";
+                              }
+                              if (!value.endsWith("@akgec.ac.in")) {
+                                return "Only @akgec.ac.in allowed";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(label: Text("Email")),
+                          ),
+                          SizedBox(height: 30),
+                          TextFormField(
+                            controller: passwordController,
+                            obscureText: obscurePassword,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Password required";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              label: Text("Password"),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    obscurePassword = !obscurePassword;
+                                  });
+                                },
+                                icon: obscurePassword
+                                    ? Icon(Icons.visibility_off)
+                                    : Icon(Icons.visibility),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 30),
-                        ElevatedButton(
-                          onPressed: () {
-                            context.read<LoginBloc>().add(
-                              RequestLoginEvent(
-                                email: emailController.text.trim(),
-                                password: passwordController.text.trim(),
-                              ),
-                            );
-                          },
-                          child: Text("Log in"),
-                        ),
-                      ],
-                    ),
+                          SizedBox(height: 30),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+                                return;
+                              }
+                              context.read<LoginBloc>().add(
+                                RequestLoginEvent(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                ),
+                              );
+                            },
+                            child: Text("Log in"),
+                          ),
+                        ],
+                      ),
+              ),
             ),
           ),
         );

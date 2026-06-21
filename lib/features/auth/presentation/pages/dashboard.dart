@@ -7,7 +7,7 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("You are registered !!"),
+        child: Text("Welcome !!"),
       ),
     );
   }
