@@ -5,6 +5,9 @@ import 'package:vems/core/dependency_injection.dart';
 import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
 import 'package:vems/features/auth/presentation/pages/login_page.dart';
+import 'package:vems/features/auth/presentation/pages/register_email.dart';
+import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:vems/features/profile/presentation/pages/profile_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,8 +25,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => getIt<RegisterBloc>()),
         BlocProvider(create: (_) => getIt<LoginBloc>()),
+        BlocProvider(create: (_) => getIt<ProfileBloc>()),
       ],
-      child: MaterialApp(title: 'VEMS', home: const LoginPage()),
+      child: MaterialApp(title: 'VEMS', home: const ProfilePage()),
     );
   }
 }

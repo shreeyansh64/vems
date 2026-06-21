@@ -10,6 +10,10 @@ import 'package:vems/features/auth/domain/repository/login_repository.dart';
 import 'package:vems/features/auth/domain/repository/register_repository.dart';
 import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
+import 'package:vems/features/profile/data/data_sources/profile_remote.dart';
+import 'package:vems/features/profile/data/repository/profile_repository_impl.dart';
+import 'package:vems/features/profile/domain/repository/profile_repository.dart';
+import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
 
 var getIt = GetIt.instance;
 
@@ -37,4 +41,13 @@ void setup() {
     () => LoginRepositoryImpl(loginRemote: getIt()),
   );
   getIt.registerFactory<LoginBloc>(() => LoginBloc(loginRepository: getIt()));
+
+  // profile
+  getIt.registerLazySingleton<ProfileRemote>(() => ProfileRemote(dio: getIt()));
+  getIt.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(profileRemote: getIt()),
+  );
+  getIt.registerFactory<ProfileBloc>(
+    () => ProfileBloc(profileRepository: getIt()),
+  );
 }

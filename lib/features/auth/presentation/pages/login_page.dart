@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:vems/features/auth/presentation/pages/dashboard.dart';
+import 'package:vems/features/profile/presentation/pages/profile_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
             MaterialPageRoute(
               builder: (_) => BlocProvider.value(
                 value: context.read<LoginBloc>(),
-                child: Dashboard(),
+                child: ProfilePage(),
               ),
             ),
           );
