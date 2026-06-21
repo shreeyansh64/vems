@@ -14,6 +14,10 @@ import 'package:vems/features/profile/data/data_sources/profile_remote.dart';
 import 'package:vems/features/profile/data/repository/profile_repository_impl.dart';
 import 'package:vems/features/profile/domain/repository/profile_repository.dart';
 import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:vems/features/vehicle/data/data_source/vehicle_remote.dart';
+import 'package:vems/features/vehicle/data/repository/vehicle_repository_impl.dart';
+import 'package:vems/features/vehicle/domain/repository/vehicle_repository.dart';
+import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
 
 var getIt = GetIt.instance;
 
@@ -49,5 +53,14 @@ void setup() {
   );
   getIt.registerFactory<ProfileBloc>(
     () => ProfileBloc(profileRepository: getIt()),
+  );
+
+  // vehicle
+  getIt.registerLazySingleton<VehicleRemote>(() => VehicleRemote(dio: getIt()));
+  getIt.registerLazySingleton<VehicleRepository>(
+    () => VehicleRepositoryImpl(vehicleRemote: getIt()),
+  );
+  getIt.registerFactory<VehicleBloc>(
+    () => VehicleBloc(vehicleRepository: getIt()),
   );
 }
