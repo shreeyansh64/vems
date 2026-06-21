@@ -1,3 +1,5 @@
+import 'package:vems/features/auth/domain/model/login_response.dart';
+
 abstract class LoginRepository {
-  Future<void> requestLogin(String email, String password);
+  Future<LoginResponse> requestLogin(String email, String password);
 }
