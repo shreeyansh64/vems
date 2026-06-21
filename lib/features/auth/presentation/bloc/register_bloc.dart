@@ -60,6 +60,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       var response = await registerRepository.setPassword(
         event.email,
         event.password,
+        event.confirmPassword
       );
       emit(
         state.copyWith(status: RegisterStatus.setPassword, message: response),

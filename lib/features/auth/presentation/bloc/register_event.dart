@@ -17,5 +17,6 @@ class VerifyOtpEvent extends RegisterEvent {
 class SetPasswordEvent extends RegisterEvent {
   final String email;
   final String password;
-  SetPasswordEvent({required this.email, required this.password});
+  final String confirmPassword;
+  SetPasswordEvent({required this.email, required this.password, required this.confirmPassword});
 }

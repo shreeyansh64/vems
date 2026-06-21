@@ -14,7 +14,7 @@ class RegisterRemote {
     return response.data['message'];
   }
 
-  Future<String> setPassword(String email,  String password) async {
+  Future<String> setPassword(String email,  String password, String confirmPassword) async {
     var response = await dio.post('/api/auth/register/', data: {'email': email});
     return response.data['message'];
   }

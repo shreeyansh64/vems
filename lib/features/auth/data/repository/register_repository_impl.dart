@@ -11,8 +11,8 @@ class RegisterRepositoryImpl implements RegisterRepository {
   }
 
   @override
-  Future<String> setPassword(String email, String password) {
-    return registerRemote.setPassword(email, password);
+  Future<String> setPassword(String email, String password, String confirmPassword) {
+    return registerRemote.setPassword(email, password, confirmPassword);
   }
   
   @override
