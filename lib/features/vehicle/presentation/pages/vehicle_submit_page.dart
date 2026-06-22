@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vems/features/auth/presentation/pages/dashboard.dart';
+import 'package:vems/features/documents/presentation/pages/document_page.dart';
 import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
 
 class VehicleSubmitPage extends StatefulWidget {
@@ -88,7 +89,7 @@ class _VehicleSubmitPageState extends State<VehicleSubmitPage> {
             Navigator.push(
               context,
               PageRouteBuilder(
-                pageBuilder: (_, __, ___) => const Dashboard(),
+                pageBuilder: (_, __, ___) => const DocumentUploadPage(),
                 transitionsBuilder: (_, animation, __, child) {
                   return FadeTransition(opacity: animation, child: child);
                 },
