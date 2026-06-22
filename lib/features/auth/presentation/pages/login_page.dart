@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
+import 'package:vems/features/auth/presentation/pages/register_email.dart';
 import 'package:vems/features/profile/presentation/pages/profile_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -324,6 +325,71 @@ class _LoginPageState extends State<LoginPage> {
                                     letterSpacing: 0.4,
                                   ),
                                 ),
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Divider(
+                                    color: Color(0xFF2A2A2A),
+                                    thickness: 1,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 12),
+                                  child: Text(
+                                    'OR',
+                                    style: TextStyle(
+                                      color: Color(0xFF6B6B6B),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 1.2,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Divider(
+                                    color: Color(0xFF2A2A2A),
+                                    thickness: 1,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 20),
+
+                            Center(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    "Don't have an account? ",
+                                    style: TextStyle(
+                                      color: Color(0xFF6B6B6B),
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => RegisterEmail(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      'Register',
+                                      style: TextStyle(
+                                        color: Color(0xFFFFAB00),
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

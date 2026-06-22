@@ -7,10 +7,14 @@ class LoginRemote {
   LoginRemote({required this.dio});
 
   Future<LoginResponse> requestLogin(String email, String password) async {
-    var response = await dio.post(
-      '/api/auth/login/',
-      data: {'email': email, 'password': password},
-    );
-    return LoginResponse.fromJson(response.data as Map<String, dynamic>);
+    try {
+      var response = await dio.post(
+        '/api/auth/login/',
+        data: {'email': email, 'password': password},
+      );
+      return LoginResponse.fromJson(response.data as Map<String, dynamic>);
+    } on DioException catch (e) {
+      throw e.response?.data["message"] ?? e.response?.data["email"] ?? "Something went wrong";
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
+import 'package:vems/features/auth/presentation/pages/login_page.dart';
 import 'package:vems/features/auth/presentation/pages/register_verify_otp_page.dart';
 
 class RegisterEmail extends StatefulWidget {
@@ -39,7 +40,9 @@ class _RegisterEmailState extends State<RegisterEmail> {
             SnackBar(
               backgroundColor: const Color(0xFFCF6679),
               behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
               content: Text(
                 state.errorMessage ?? 'Something went wrong',
                 style: const TextStyle(color: Colors.white),
@@ -141,10 +144,11 @@ class _RegisterEmailState extends State<RegisterEmail> {
                                       ),
                                       filled: true,
                                       fillColor: const Color(0xFF111111),
-                                      contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                        vertical: 14,
-                                      ),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 16,
+                                            vertical: 14,
+                                          ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(12),
                                         borderSide: BorderSide.none,
@@ -178,7 +182,8 @@ class _RegisterEmailState extends State<RegisterEmail> {
                                         ),
                                       ),
                                     ),
-                                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
                                         return 'Email required';
@@ -202,7 +207,9 @@ class _RegisterEmailState extends State<RegisterEmail> {
                                 onPressed: () {
                                   if (emailController.text.isEmpty) return;
                                   context.read<RegisterBloc>().add(
-                                    GetOTPEvent(email: emailController.text.trim()),
+                                    GetOTPEvent(
+                                      email: emailController.text.trim(),
+                                    ),
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -233,6 +240,71 @@ class _RegisterEmailState extends State<RegisterEmail> {
                                   fontSize: 12,
                                   color: Colors.grey.shade700,
                                 ),
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Divider(
+                                    color: Color(0xFF2A2A2A),
+                                    thickness: 1,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 12),
+                                  child: Text(
+                                    'OR',
+                                    style: TextStyle(
+                                      color: Color(0xFF6B6B6B),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 1.2,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Divider(
+                                    color: Color(0xFF2A2A2A),
+                                    thickness: 1,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 20),
+
+                            Center(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    'Already have an account? ',
+                                    style: TextStyle(
+                                      color: Color(0xFF6B6B6B),
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => LoginPage(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      'Login',
+                                      style: TextStyle(
+                                        color: Color(0xFFFFAB00),
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

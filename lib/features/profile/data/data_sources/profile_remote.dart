@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class ProfileRemote {
   final Dio dio;
@@ -10,7 +11,8 @@ class ProfileRemote {
     required String studentNumber,
     String? photoPath,
   }) async {
-    final map = <String, dynamic>{
+    try {
+      final map = <String, dynamic>{
       'first_name': firstName,
       'last_name': lastName,
       'student_number': studentNumber,
@@ -27,5 +29,9 @@ class ProfileRemote {
       '/api/users/profile/',
       data: FormData.fromMap(map),
     );
+    } on DioException catch (e) {
+      debugPrint(e.response?.data);
+      throw e.response?.data["message"] ?? e.response?.data["email"] ?? "Something went wrong"; 
+    }
   }
 }
