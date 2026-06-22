@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:vems/core/di/document_di.dart';
 
 import 'core_di.dart';
 import 'auth_di.dart';
@@ -12,4 +13,5 @@ void setup() {
   registerAuth(getIt);
   registerProfile(getIt);
   registerVehicle(getIt);
+  registerDocument(getIt);
 }
