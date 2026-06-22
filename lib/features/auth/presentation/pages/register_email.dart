@@ -73,137 +73,136 @@ class _RegisterEmailState extends State<RegisterEmail> {
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Center(
-                child: state.status == RegisterStatus.loading
-                    ? const CupertinoActivityIndicator(
-                        radius: 14,
-                        color: Color(0xFFFFAB00),
-                      )
-                    : SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            const Text(
-                              'Create Account',
-                              style: TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFFE0E0E0),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            const Text(
-                              'Enter your college email to continue.',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF6B6B6B),
-                              ),
-                            ),
-                            const SizedBox(height: 40),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const Text(
+                        'Create Account',
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFFE0E0E0),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Enter your college email to continue.',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF6B6B6B),
+                        ),
+                      ),
+                      const SizedBox(height: 40),
 
-                            Container(
-                              padding: const EdgeInsets.all(24),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF1A1A1A),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: const Color(0xFF2A2A2A),
-                                  width: 1,
+                      Container(
+                        padding: const EdgeInsets.all(24),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1A1A1A),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: const Color(0xFF2A2A2A),
+                            width: 1,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'EMAIL ADDRESS',
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF6B6B6B),
+                                letterSpacing: 1.2,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            TextFormField(
+                              controller: emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              style: const TextStyle(
+                                color: Color(0xFFE0E0E0),
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
+                                hintText: 'yourname@akgec.ac.in',
+                                hintStyle: const TextStyle(
+                                  color: Color(0xFF3D3D3D),
+                                  fontSize: 14,
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.email_outlined,
+                                  color: Color(0xFFFFAB00),
+                                  size: 20,
+                                ),
+                                filled: true,
+                                fillColor: const Color(0xFF111111),
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 14,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide.none,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFF2A2A2A),
+                                    width: 1,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFFFAB00),
+                                    width: 1.8,
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFCF6679),
+                                    width: 1.5,
+                                  ),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFCF6679),
+                                    width: 1.8,
+                                  ),
                                 ),
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'EMAIL ADDRESS',
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xFF6B6B6B),
-                                      letterSpacing: 1.2,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  TextFormField(
-                                    controller: emailController,
-                                    keyboardType: TextInputType.emailAddress,
-                                    style: const TextStyle(
-                                      color: Color(0xFFE0E0E0),
-                                      fontSize: 15,
-                                    ),
-                                    decoration: InputDecoration(
-                                      hintText: 'yourname@akgec.ac.in',
-                                      hintStyle: const TextStyle(
-                                        color: Color(0xFF3D3D3D),
-                                        fontSize: 14,
-                                      ),
-                                      prefixIcon: const Icon(
-                                        Icons.email_outlined,
-                                        color: Color(0xFFFFAB00),
-                                        size: 20,
-                                      ),
-                                      filled: true,
-                                      fillColor: const Color(0xFF111111),
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                            horizontal: 16,
-                                            vertical: 14,
-                                          ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                        borderSide: BorderSide.none,
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF2A2A2A),
-                                          width: 1,
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFFFAB00),
-                                          width: 1.8,
-                                        ),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFCF6679),
-                                          width: 1.5,
-                                        ),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFCF6679),
-                                          width: 1.8,
-                                        ),
-                                      ),
-                                    ),
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Email required';
-                                      }
-                                      if (!value.endsWith('@akgec.ac.in')) {
-                                        return 'Only @akgec.ac.in allowed';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ],
-                              ),
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Email required';
+                                }
+                                if (!value.endsWith('@akgec.ac.in')) {
+                                  return 'Only @akgec.ac.in allowed';
+                                }
+                                return null;
+                              },
                             ),
+                          ],
+                        ),
+                      ),
 
-                            const SizedBox(height: 28),
+                      const SizedBox(height: 28),
 
-                            SizedBox(
-                              width: double.infinity,
-                              height: 52,
-                              child: ElevatedButton(
+                      SizedBox(
+                        width: double.infinity,
+                        height: 52,
+                        child: state.status == RegisterStatus.loading
+                            ? const CupertinoActivityIndicator(
+                                radius: 14,
+                                color: Color(0xFFFFAB00),
+                              )
+                            : ElevatedButton(
                                 onPressed: () {
                                   if (emailController.text.isEmpty) return;
                                   context.read<RegisterBloc>().add(
@@ -229,87 +228,87 @@ class _RegisterEmailState extends State<RegisterEmail> {
                                   ),
                                 ),
                               ),
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      Center(
+                        child: Text(
+                          'Only @akgec.ac.in emails are accepted',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey.shade700,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              color: Color(0xFF2A2A2A),
+                              thickness: 1,
                             ),
-
-                            const SizedBox(height: 16),
-
-                            Center(
-                              child: Text(
-                                'Only @akgec.ac.in emails are accepted',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey.shade700,
-                                ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12),
+                            child: Text(
+                              'OR',
+                              style: TextStyle(
+                                color: Color(0xFF6B6B6B),
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 1.2,
                               ),
                             ),
-                            const SizedBox(height: 24),
-
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Divider(
-                                    color: Color(0xFF2A2A2A),
-                                    thickness: 1,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 12),
-                                  child: Text(
-                                    'OR',
-                                    style: TextStyle(
-                                      color: Color(0xFF6B6B6B),
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: 1.2,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Divider(
-                                    color: Color(0xFF2A2A2A),
-                                    thickness: 1,
-                                  ),
-                                ),
-                              ],
+                          ),
+                          Expanded(
+                            child: Divider(
+                              color: Color(0xFF2A2A2A),
+                              thickness: 1,
                             ),
+                          ),
+                        ],
+                      ),
 
-                            const SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
-                            Center(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Text(
-                                    'Already have an account? ',
-                                    style: TextStyle(
-                                      color: Color(0xFF6B6B6B),
-                                      fontSize: 13,
-                                    ),
+                      Center(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              'Already have an account? ',
+                              style: TextStyle(
+                                color: Color(0xFF6B6B6B),
+                                fontSize: 13,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => LoginPage(),
                                   ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (_) => LoginPage(),
-                                        ),
-                                      );
-                                    },
-                                    child: Text(
-                                      'Login',
-                                      style: TextStyle(
-                                        color: Color(0xFFFFAB00),
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                );
+                              },
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: Color(0xFFFFAB00),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
