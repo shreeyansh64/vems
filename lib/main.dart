@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<ProfileBloc>()),
         BlocProvider(create: (_) => getIt<VehicleBloc>()),
       ],
-      child: MaterialApp(title: 'VEMS', home: const LoginPage()),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'VEMS', home: const LoginPage()),
     );
   }
 }

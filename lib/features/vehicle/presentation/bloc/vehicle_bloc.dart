@@ -27,7 +27,7 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
         vehicleColor: event.vehicleColor,
         rcNumber: event.rcNumber,
       );
-      emit(state.copyWith(status: VehicleStatus.success, id: response.id));
+      emit(state.copyWith(status: VehicleStatus.success, id: response.id, user: response.user));
     } catch (e) {
       emit(state.copyWith(error: e.toString(), status: VehicleStatus.error));
     }
