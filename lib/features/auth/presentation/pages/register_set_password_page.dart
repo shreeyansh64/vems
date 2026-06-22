@@ -33,11 +33,11 @@ class _RegisterSetPasswordPageState extends State<RegisterSetPasswordPage> {
         if (state.status == RegisterStatus.setPassword) {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (_) => BlocProvider.value(
-                value: context.read<RegisterBloc>(),
-                child: LoginPage(),
-              ),
+            PageRouteBuilder(
+              pageBuilder: (_, __, ___) => const LoginPage(),
+              transitionsBuilder: (_, animation, __, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
             ),
           );
         } else if (state.status == RegisterStatus.error) {

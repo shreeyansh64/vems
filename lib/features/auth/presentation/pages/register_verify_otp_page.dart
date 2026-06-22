@@ -27,14 +27,17 @@ class _RegisterVerifyOtpPageState extends State<RegisterVerifyOtpPage> {
       listener: (context, state) {
         if (state.status == RegisterStatus.verifyOtp) {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => BlocProvider.value(
-                value: context.read<RegisterBloc>(),
-                child: RegisterSetPasswordPage(),
-              ),
-            ),
-          );
+  context,
+  PageRouteBuilder(
+    pageBuilder: (_, __, ___) => const RegisterSetPasswordPage(),
+    transitionsBuilder: (_, animation, __, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+  ),
+);
         } else if (state.status == RegisterStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

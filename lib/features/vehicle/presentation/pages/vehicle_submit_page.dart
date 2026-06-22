@@ -87,7 +87,12 @@ class _VehicleSubmitPageState extends State<VehicleSubmitPage> {
           if (state.status == VehicleStatus.success) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => Dashboard()),
+              PageRouteBuilder(
+                pageBuilder: (_, __, ___) => const Dashboard(),
+                transitionsBuilder: (_, animation, __, child) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+              ),
             );
           } else if (state.status == VehicleStatus.error) {
             ScaffoldMessenger.of(context).showSnackBar(

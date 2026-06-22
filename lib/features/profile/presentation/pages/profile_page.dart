@@ -100,11 +100,11 @@ class _ProfilePageState extends State<ProfilePage> {
             if (state.status == ProfileStatus.success) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => BlocProvider.value(
-                    value: context.read<ProfileBloc>(),
-                    child: VehicleSubmitPage(),
-                  ),
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const VehicleSubmitPage(),
+                  transitionsBuilder: (_, animation, __, child) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
                 ),
               );
             } else if (state.status == ProfileStatus.error) {

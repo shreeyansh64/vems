@@ -22,13 +22,13 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state.status == LoginStatus.success) {
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (_) => BlocProvider.value(
-                value: context.read<LoginBloc>(),
-                child: ProfilePage(),
-              ),
+            PageRouteBuilder(
+              pageBuilder: (_, __, ___) => const ProfilePage(),
+              transitionsBuilder: (_, animation, __, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
             ),
           );
         } else if (state.status == LoginStatus.error) {
@@ -373,8 +373,16 @@ class _LoginPageState extends State<LoginPage> {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (_) => RegisterEmail(),
+                                  PageRouteBuilder(
+                                    pageBuilder: (_, __, ___) =>
+                                        const RegisterEmail(),
+                                    transitionsBuilder:
+                                        (_, animation, __, child) {
+                                          return FadeTransition(
+                                            opacity: animation,
+                                            child: child,
+                                          );
+                                        },
                                   ),
                                 );
                               },

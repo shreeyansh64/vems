@@ -28,11 +28,11 @@ class _RegisterEmailState extends State<RegisterEmail> {
         if (state.status == RegisterStatus.otpSent) {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (_) => BlocProvider.value(
-                value: context.read<RegisterBloc>(),
-                child: RegisterVerifyOtpPage(),
-              ),
+            PageRouteBuilder(
+              pageBuilder: (_, __, ___) => const RegisterVerifyOtpPage(),
+              transitionsBuilder: (_, animation, __, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
             ),
           );
         } else if (state.status == RegisterStatus.error) {
@@ -289,8 +289,16 @@ class _RegisterEmailState extends State<RegisterEmail> {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (_) => LoginPage(),
+                                  PageRouteBuilder(
+                                    pageBuilder: (_, __, ___) =>
+                                        const LoginPage(),
+                                    transitionsBuilder:
+                                        (_, animation, __, child) {
+                                          return FadeTransition(
+                                            opacity: animation,
+                                            child: child,
+                                          );
+                                        },
                                   ),
                                 );
                               },
