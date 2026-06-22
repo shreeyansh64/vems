@@ -5,6 +5,7 @@ import 'package:vems/core/di/injection.dart';
 import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
 import 'package:vems/features/auth/presentation/pages/login_page.dart';
+import 'package:vems/features/documents/presentation/bloc/document_bloc.dart';
 import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
 
@@ -26,10 +27,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<LoginBloc>()),
         BlocProvider(create: (_) => getIt<ProfileBloc>()),
         BlocProvider(create: (_) => getIt<VehicleBloc>()),
+        BlocProvider(create: (_) => getIt<DocumentBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'VEMS', home: const LoginPage()),
+        title: 'VEMS',
+        home: const LoginPage(),
+      ),
     );
   }
 }
