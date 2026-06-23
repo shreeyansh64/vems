@@ -134,8 +134,7 @@ class _DashboardState extends State<Dashboard> {
                       if (state.status == DashboardStatus.error)
                         Text(
                           state.errorMessage ?? 'Something went wrong',
-                          style:
-                              const TextStyle(color: Color(0xFFCF6679)),
+                          style: const TextStyle(color: Color(0xFFCF6679)),
                         )
                       else if (registrations.isEmpty)
                         const Text(

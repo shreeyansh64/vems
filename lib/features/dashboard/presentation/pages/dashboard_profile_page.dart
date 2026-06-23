@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:vems/features/auth/presentation/pages/login_page.dart';
+import 'package:vems/features/dashboard/domain/model/profile_model.dart';
 import 'package:vems/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:vems/features/profile/presentation/pages/profile_page.dart';
 import 'package:vems/features/vehicle/presentation/pages/vehicle_submit_page.dart';
@@ -231,7 +234,24 @@ class _DashboardProfilePageState extends State<DashboardProfilePage> {
                         width: double.infinity,
                         height: 48,
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            final FlutterSecureStorage storage =
+                                FlutterSecureStorage();
+                            await storage.delete(key: 'access_token');
+                            await storage.delete(key: 'refresh_token');
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (_, __, ___) => const LoginPage(),
+                                transitionsBuilder: (_, animation, __, child) {
+                                  return FadeTransition(
+                                    opacity: animation,
+                                    child: child,
+                                  );
+                                },
+                              ),
+                            );
+                          },
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(
                               color: Color(0xFFCF6679),

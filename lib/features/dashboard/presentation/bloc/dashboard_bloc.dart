@@ -22,6 +22,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     GetProfileEvent event,
     Emitter<DashboardState> emit,
   ) async {
+    if (state.profile != null) return;
     emit(state.copyWith(status: DashboardStatus.loading));
     try {
       final profile = await dashboardRepository.getProfile();
@@ -38,6 +39,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     GetRegistrationStatusEvent event,
     Emitter<DashboardState> emit,
   ) async {
+    if (state.registration != null) return;
     emit(state.copyWith(status: DashboardStatus.loading));
     try {
       final registration = await dashboardRepository.getRegistration();
