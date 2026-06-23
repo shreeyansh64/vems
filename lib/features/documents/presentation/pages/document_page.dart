@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:vems/features/auth/presentation/pages/dashboard.dart';
 import 'package:vems/features/documents/presentation/bloc/document_bloc.dart';
+import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
 
 class DocumentUploadPage extends StatelessWidget {
   const DocumentUploadPage({super.key});
@@ -163,18 +163,12 @@ class DocumentUploadPage extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: allDone
                               ? () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (_, __, ___) =>
-                                          const Dashboard(),
-                                      transitionsBuilder:
-                                          (_, animation, __, child) {
-                                            return FadeTransition(
-                                              opacity: animation,
-                                              child: child,
-                                            );
-                                          },
+                                  context.read<DocumentBloc>().add(
+                                    SubmitRegistrationEvent(
+                                      vehicleId: context
+                                          .read<VehicleBloc>()
+                                          .state
+                                          .id!,
                                     ),
                                   );
                                 }

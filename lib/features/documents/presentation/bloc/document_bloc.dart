@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vems/features/documents/domain/model/document_model.dart';
+import 'package:vems/features/documents/domain/model/registration_model.dart';
 import 'package:vems/features/documents/domain/repository/document_repository.dart';
 
 part 'document_event.dart';
@@ -63,13 +64,13 @@ class DocumentBloc extends Bloc<DocumentEvent, DocumentState> {
   ) async {
     emit(state.copyWith(status: DocumentStatus.loading));
     try {
-      final message = await documentRepository.submitRegistration(
+      final response = await documentRepository.submitRegistration(
         event.vehicleId,
       );
       emit(
         state.copyWith(
           status: DocumentStatus.registrationSubmitted,
-          message: message,
+          registration: response,
         ),
       );
     } catch (e) {

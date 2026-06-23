@@ -5,6 +5,7 @@ enum DocumentStatus { initial, loading, uploaded, failed, error, registrationSub
 class DocumentState {
   final DocumentStatus status;
   final String? errorMessage;
+  final RegistrationModel? registration;
   final DocumentModel? uploadedDocument;
   final Map<String, String> ocrStatuses;
 
@@ -12,6 +13,7 @@ class DocumentState {
     required this.status,
     this.errorMessage,
     this.uploadedDocument,
+    this.registration,
     this.ocrStatuses = const {},
   });
 
@@ -20,12 +22,14 @@ class DocumentState {
   DocumentState copyWith({
     DocumentStatus? status,
     String? errorMessage,
+    RegistrationModel? registration,
     DocumentModel? uploadedDocument,
     Map<String, String>? ocrStatuses,
   }) {
     return DocumentState._(
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,
+      registration: registration ?? this.registration,
       uploadedDocument: uploadedDocument ?? this.uploadedDocument,
       ocrStatuses: ocrStatuses ?? this.ocrStatuses,
     );
