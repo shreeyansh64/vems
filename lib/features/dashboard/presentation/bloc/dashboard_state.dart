@@ -5,11 +5,13 @@ enum DashboardStatus { initial, loading, success, error }
 class DashboardState {
   final DashboardStatus status;
   final ProfileModel? profile;
+  final DashboardRegistrationModel? registration;
   final String? errorMessage;
 
   DashboardState._({
     required this.status,
     this.profile,
+    this.registration,
     this.errorMessage,
   });
 
@@ -19,11 +21,13 @@ class DashboardState {
   DashboardState copyWith({
     DashboardStatus? status,
     ProfileModel? profile,
+    DashboardRegistrationModel? registration,
     String? errorMessage,
   }) {
     return DashboardState._(
       status: status ?? this.status,
       profile: profile ?? this.profile,
+      registration: registration ?? this.registration,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }

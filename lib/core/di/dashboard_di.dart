@@ -9,9 +9,9 @@ void registerDashboard(GetIt getIt) {
     () => DashboardRemote(dio: getIt()),
   );
   getIt.registerLazySingleton<DashboardRepository>(
-    () => DashboardRepositoryImpl(fetchProfileRemote: getIt()),
+    () => DashboardRepositoryImpl(dashboardRemote: getIt()),
   );
   getIt.registerFactory<DashboardBloc>(
-    () => DashboardBloc(fetchProfileRepository: getIt()),
+    () => DashboardBloc(dashboardRepository: getIt()),
   );
 }
