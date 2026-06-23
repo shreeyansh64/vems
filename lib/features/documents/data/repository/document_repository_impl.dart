@@ -11,4 +11,9 @@ class DocumentRepositoryImpl implements DocumentRepository {
   Future<DocumentModel> uploadDocument(String documentType, File file) {
     return documentRemote.uploadDocument(documentType, file);
   }
+  
+  @override
+  Future<String> submitRegistration(int vehicleId) {
+    return documentRemote.submitRegistration(vehicleId);
+  }
 }

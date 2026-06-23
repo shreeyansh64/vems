@@ -25,4 +25,16 @@ class DocumentRemote {
           "Something went wrong";
     }
   }
+
+  Future<String> submitRegistration(int vehicleId) async {
+    try {
+      final response = await dio.post(
+        '/api/registrations/',
+        data: {'vehicle': vehicleId},
+      );
+      return response.data['message'] ?? 'Registration submitted';
+    } on DioException catch (e) {
+      throw e.response?.data['message'] ?? e.response?.data['vehicle'] ??  'Something went wrong';
+    }
+  }
 }
