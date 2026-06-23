@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:vems/app_root.dart';
 import 'package:vems/core/di/injection.dart';
 import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:vems/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:vems/features/dashboard/presentation/pages/dashboard_bottom_navbar.dart';
 import 'package:vems/features/documents/presentation/bloc/document_bloc.dart';
 import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:vems/features/session/presentation/bloc/session_bloc.dart';
 import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
 
 void main() async {
@@ -32,12 +34,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<VehicleBloc>()),
         BlocProvider(create: (_) => getIt<DocumentBloc>()),
         BlocProvider(create: (_) => getIt<DashboardBloc>()),
+        BlocProvider(create: (_) => getIt<SessionBloc>()),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'VEMS',
-        home: const DashboardBottomNavbar(),
+        home: const AppRoot(),
       ),
     );
   }

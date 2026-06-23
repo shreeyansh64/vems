@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:vems/core/di/dashboard_di.dart';
 import 'package:vems/core/di/document_di.dart';
+import 'package:vems/core/di/session_bloc.dart';
 
 import 'core_di.dart';
 import 'auth_di.dart';
@@ -16,4 +17,5 @@ void setup() {
   registerVehicle(getIt);
   registerDocument(getIt);
   registerDashboard(getIt);
+  registerSession(getIt);
 }
