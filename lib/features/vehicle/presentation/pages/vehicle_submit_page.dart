@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vems/dashboard.dart';
+import 'package:vems/features/dashboard/presentation/pages/dashboard.dart';
 import 'package:vems/features/documents/presentation/pages/document_page.dart';
 import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
 
