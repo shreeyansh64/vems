@@ -1,6 +1,6 @@
 part of 'document_bloc.dart';
 
-enum DocumentStatus { initial, loading, uploaded, failed, error }
+enum DocumentStatus { initial, loading, uploaded, failed, error, registrationSubmitted}
 
 class DocumentState {
   final DocumentStatus status;
