@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:vems/core/di/dashboard_di.dart';
 import 'package:vems/core/di/document_di.dart';
 
 import 'core_di.dart';
@@ -14,4 +15,5 @@ void setup() {
   registerProfile(getIt);
   registerVehicle(getIt);
   registerDocument(getIt);
+  registerDashboard(getIt);
 }
