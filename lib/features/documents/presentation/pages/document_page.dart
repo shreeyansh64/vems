@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:vems/dashboard.dart';
 import 'package:vems/features/documents/presentation/bloc/document_bloc.dart';
 import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
 
@@ -52,6 +53,17 @@ class DocumentUploadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<DocumentBloc, DocumentState>(
       listener: (context, state) {
+        if (state.status == DocumentStatus.registrationSubmitted) {
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (_, __, ___) => const Dashboard(),
+              transitionsBuilder: (_, animation, __, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+            ),
+          );
+        }
         if (state.status == DocumentStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
