@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:vems/features/dashboard/presentation/pages/dashboard.dart';
+import 'package:vems/features/dashboard/presentation/pages/dashboard_my_vehicles_page.dart';
 import 'package:vems/features/dashboard/presentation/pages/dashboard_profile_page.dart';
 
 class DashboardBottomNavbar extends StatefulWidget {
@@ -15,6 +16,7 @@ class _DashboardBottomNavbarState extends State<DashboardBottomNavbar> {
 
   final _pages = const [
     Dashboard(),
+    MyVehiclesPage(),
     DashboardProfilePage(),
   ];
 
@@ -43,6 +45,7 @@ class _DashboardBottomNavbarState extends State<DashboardBottomNavbar> {
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
           tabs: const [
             GButton(icon: Icons.home_sharp, text: 'Home'),
+            GButton(icon: Icons.directions_car_outlined, text: 'Vehicles'),
             GButton(icon: Icons.person, text: 'Profile'),
           ],
         ),

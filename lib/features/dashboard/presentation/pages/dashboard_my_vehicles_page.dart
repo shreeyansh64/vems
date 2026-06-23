@@ -4,8 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vems/features/dashboard/domain/model/vehicle_model.dart';
 import 'package:vems/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 
-class MyVehiclesPage extends StatelessWidget {
+class MyVehiclesPage extends StatefulWidget {
   const MyVehiclesPage({super.key});
+
+  @override
+  State<MyVehiclesPage> createState() => _MyVehiclesPageState();
+}
+
+class _MyVehiclesPageState extends State<MyVehiclesPage> {
+
+  @override
+  void initState() {
+    context.read<DashboardBloc>().add(GetVehiclesEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
