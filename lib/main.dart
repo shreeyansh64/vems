@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'VEMS',
-        home: const LoginPage(),
+        home: const DashboardBottomNavbar(),
       ),
     );
   }

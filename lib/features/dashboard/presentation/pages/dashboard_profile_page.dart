@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vems/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:vems/features/profile/presentation/pages/profile_page.dart';
+import 'package:vems/features/vehicle/presentation/pages/vehicle_submit_page.dart';
 
 class DashboardProfilePage extends StatefulWidget {
   const DashboardProfilePage({super.key});
@@ -37,117 +39,228 @@ class _DashboardProfilePageState extends State<DashboardProfilePage> {
 
         return Scaffold(
           backgroundColor: const Color(0xFF0D0D0D),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                children: [
-                  const SizedBox(height: 32),
+          body: Column(
+            children: [
+              // ── Profile hero header ───────────────────────────────────
+              Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Color(0xFF1C1A14), Color(0xFF0D0D0D)],
+                  ),
+                  border: Border(
+                    bottom: BorderSide(color: Color(0xFF1E1E1E), width: 1),
+                  ),
+                ),
+                child: SafeArea(
+                  bottom: false,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 36, 24, 32),
+                    child: Column(
+                      children: [
+                        // Avatar
+                        Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: const Color(
+                                    0xFFFFAB00,
+                                  ).withOpacity(0.5),
+                                  width: 2,
+                                ),
+                              ),
+                              child: CircleAvatar(
+                                radius: 46,
+                                backgroundColor: const Color(0xFF2A2A2A),
+                                backgroundImage: profile?.photo != null
+                                    ? NetworkImage(profile!.photo!)
+                                    : null,
+                                child: profile?.photo == null
+                                    ? const Icon(
+                                        Icons.person,
+                                        color: Color(0xFF6B6B6B),
+                                        size: 48,
+                                      )
+                                    : null,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (_, __, ___) =>
+                                        const ProfilePage(),
+                                    transitionsBuilder:
+                                        (_, animation, __, child) {
+                                          return FadeTransition(
+                                            opacity: animation,
+                                            child: child,
+                                          );
+                                        },
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(6),
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFFFFAB00),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.edit,
+                                  size: 14,
+                                  color: Color(0xFF0D0D0D),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
 
-                  Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      CircleAvatar(
-                        radius: 48,
-                        backgroundColor: const Color(0xFF2A2A2A),
-                        backgroundImage: profile?.photo != null
-                            ? NetworkImage(profile!.photo!)
-                            : null,
-                        child: profile?.photo == null
-                            ? const Icon(
-                                Icons.person,
-                                color: Color(0xFF6B6B6B),
-                                size: 48,
-                              )
-                            : null,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: const BoxDecoration(
-                            color: Color(0xFFFFAB00),
-                            shape: BoxShape.circle,
+                        const SizedBox(height: 16),
+
+                        Text(
+                          profile != null
+                              ? '${profile.firstName} ${profile.lastName}'
+                              : '—',
+                          style: const TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFFE0E0E0),
+                            letterSpacing: 0.2,
                           ),
-                          child: const Icon(
-                            Icons.edit,
-                            size: 14,
-                            color: Color(0xFF0D0D0D),
+                        ),
+
+                        const SizedBox(height: 6),
+
+                        // Student number badge
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF1E1E1E),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: const Color(0xFF2A2A2A)),
+                          ),
+                          child: Text(
+                            profile?.studentNumber ?? '—',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFF6B6B6B),
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+              // ── Body ─────────────────────────────────────────────────
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 28, 24, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Section label + divider
+                      Row(
+                        children: [
+                          const Text(
+                            'VEHICLES',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF4A4A4A),
+                              letterSpacing: 1.4,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Container(
+                              height: 1,
+                              color: const Color(0xFF1E1E1E),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      _tile(
+                        icon: Icons.directions_car_outlined,
+                        label: 'My Vehicles',
+                        onTap: () {},
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      _tile(
+                        icon: Icons.add_circle_outline,
+                        label: 'Add Another Vehicle',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) =>
+                                  const VehicleSubmitPage(),
+                              transitionsBuilder: (_, animation, __, child) {
+                                return FadeTransition(
+                                  opacity: animation,
+                                  child: child,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
+
+                      const Spacer(),
+
+                      // Logout button
+                      SizedBox(
+                        width: double.infinity,
+                        height: 48,
+                        child: OutlinedButton(
+                          onPressed: () {},
+                          style: OutlinedButton.styleFrom(
+                            side: const BorderSide(
+                              color: Color(0xFFCF6679),
+                              width: 1,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            backgroundColor: const Color(
+                              0xFFCF6679,
+                            ).withOpacity(0.05),
+                          ),
+                          child: const Text(
+                            'Logout',
+                            style: TextStyle(
+                              color: Color(0xFFCF6679),
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.3,
+                            ),
                           ),
                         ),
                       ),
+
+                      const SizedBox(height: 24),
                     ],
                   ),
-
-                  const SizedBox(height: 14),
-
-                  Text(
-                    profile != null
-                        ? '${profile.firstName} ${profile.lastName}'
-                        : '—',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFFE0E0E0),
-                    ),
-                  ),
-
-                  const SizedBox(height: 4),
-
-                  Text(
-                    profile?.studentNumber ?? '—',
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: Color(0xFF6B6B6B),
-                    ),
-                  ),
-
-                  const SizedBox(height: 40),
-
-                  _tile(
-                    icon: Icons.directions_car_outlined,
-                    label: 'My Vehicles',
-                    onTap: () {
-                    },
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  _tile(
-                    icon: Icons.add_circle_outline,
-                    label: 'Add Another Vehicle',
-                    onTap: () {
-                    },
-                  ),
-
-                  const Spacer(),
-
-                  SizedBox(
-                    width: double.infinity,
-                    height: 48,
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: Color(0xFFCF6679)),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                      child: const Text(
-                        'Logout',
-                        style: TextStyle(
-                          color: Color(0xFFCF6679),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         );
       },
@@ -164,13 +277,20 @@ class _DashboardProfilePageState extends State<DashboardProfilePage> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         decoration: BoxDecoration(
-          color: const Color(0xFF1A1A1A),
+          color: const Color(0xFF141414),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: const Color(0xFF2A2A2A)),
+          border: Border.all(color: const Color(0xFF1E1E1E)),
         ),
         child: Row(
           children: [
-            Icon(icon, color: const Color(0xFFFFAB00), size: 20),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFAB00).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(icon, color: const Color(0xFFFFAB00), size: 18),
+            ),
             const SizedBox(width: 14),
             Text(
               label,
@@ -181,11 +301,7 @@ class _DashboardProfilePageState extends State<DashboardProfilePage> {
               ),
             ),
             const Spacer(),
-            const Icon(
-              Icons.chevron_right,
-              color: Color(0xFF6B6B6B),
-              size: 20,
-            ),
+            const Icon(Icons.chevron_right, color: Color(0xFF3A3A3A), size: 20),
           ],
         ),
       ),

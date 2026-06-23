@@ -5,7 +5,7 @@ enum DashboardStatus { initial, loading, success, error }
 class DashboardState {
   final DashboardStatus status;
   final ProfileModel? profile;
-  final DashboardRegistrationModel? registration;
+  final List<DashboardRegistrationModel>? registration;
   final String? errorMessage;
 
   DashboardState._({
@@ -21,7 +21,7 @@ class DashboardState {
   DashboardState copyWith({
     DashboardStatus? status,
     ProfileModel? profile,
-    DashboardRegistrationModel? registration,
+    List<DashboardRegistrationModel>? registration,
     String? errorMessage,
   }) {
     return DashboardState._(

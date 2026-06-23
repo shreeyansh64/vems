@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vems/features/dashboard/presentation/pages/dashboard.dart';
+import 'package:vems/features/dashboard/presentation/pages/dashboard_bottom_navbar.dart';
 import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:vems/features/vehicle/presentation/pages/vehicle_submit_page.dart';
 
@@ -101,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const VehicleSubmitPage(),
+                  pageBuilder: (_, __, ___) => const DashboardBottomNavbar(),
                   transitionsBuilder: (_, animation, __, child) {
                     return FadeTransition(opacity: animation, child: child);
                   },

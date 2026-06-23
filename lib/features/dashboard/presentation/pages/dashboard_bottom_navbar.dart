@@ -30,9 +30,9 @@ class _DashboardBottomNavbarState extends State<DashboardBottomNavbar> {
             top: BorderSide(color: Color(0xFF2A2A2A), width: 1),
           ),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: GNav(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           selectedIndex: _index,
           onTabChange: (i) => setState(() => _index = i),
           backgroundColor: const Color(0xFF1A1A1A),

@@ -15,12 +15,13 @@ class DashboardRemote {
     }
   }
 
-  Future<DashboardRegistrationModel> getRegistration() async {
-    try {
-      final response = await dio.get('/api/registrations/');
-      return DashboardRegistrationModel.fromJson(response.data as Map<String, dynamic>);
-    } on DioException catch (e) {
-      throw e.response?.data["message"] ?? "Something went wrong";
-    }
+  Future<List<DashboardRegistrationModel>> getRegistration() async {
+  try {
+    final response = await dio.get('/api/registrations/');
+    final list = response.data as List<dynamic>;
+    return list.map((e) => DashboardRegistrationModel.fromJson(e as Map<String, dynamic>)).toList();
+  } on DioException catch (e) {
+    throw e.response?.data["message"] ?? "Something went wrong";
   }
+}
 }

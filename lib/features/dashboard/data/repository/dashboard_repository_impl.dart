@@ -13,7 +13,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
   }
 
   @override
-  Future<DashboardRegistrationModel> getRegistration() {
+  Future<List<DashboardRegistrationModel>> getRegistration() {
     return dashboardRemote.getRegistration();
   }
 }
