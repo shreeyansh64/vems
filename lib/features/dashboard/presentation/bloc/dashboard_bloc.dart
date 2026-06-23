@@ -22,7 +22,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     GetProfileEvent event,
     Emitter<DashboardState> emit,
   ) async {
-    if (state.profile != null) return;
     emit(state.copyWith(status: DashboardStatus.loading));
     try {
       final profile = await dashboardRepository.getProfile();
