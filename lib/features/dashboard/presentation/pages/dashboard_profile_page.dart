@@ -5,6 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:vems/features/auth/presentation/pages/login_page.dart';
 import 'package:vems/features/dashboard/domain/model/profile_model.dart';
 import 'package:vems/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:vems/features/dashboard/presentation/pages/dashboard_my_vehicles_page.dart';
 import 'package:vems/features/profile/presentation/pages/profile_page.dart';
 import 'package:vems/features/vehicle/presentation/pages/vehicle_submit_page.dart';
 
@@ -202,9 +203,22 @@ class _DashboardProfilePageState extends State<DashboardProfilePage> {
                       _tile(
                         icon: Icons.directions_car_outlined,
                         label: 'My Vehicles',
-                        onTap: () {},
+                        onTap: () {
+                          context.read<DashboardBloc>().add(GetVehiclesEvent());
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) =>
+                                  const MyVehiclesPage(),
+                              transitionsBuilder: (_, animation, __, child) =>
+                                  FadeTransition(
+                                    opacity: animation,
+                                    child: child,
+                                  ),
+                            ),
+                          );
+                        },
                       ),
-
                       const SizedBox(height: 10),
 
                       _tile(

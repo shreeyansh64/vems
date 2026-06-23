@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:vems/features/dashboard/presentation/pages/dashboard.dart';
+import 'package:vems/features/dashboard/presentation/pages/dashboard_bottom_navbar.dart';
 import 'package:vems/features/documents/presentation/bloc/document_bloc.dart';
 import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
 
@@ -57,7 +58,7 @@ class DocumentUploadPage extends StatelessWidget {
           Navigator.push(
             context,
             PageRouteBuilder(
-              pageBuilder: (_, __, ___) => const Dashboard(),
+              pageBuilder: (_, __, ___) => const DashboardBottomNavbar(),
               transitionsBuilder: (_, animation, __, child) {
                 return FadeTransition(opacity: animation, child: child);
               },
@@ -225,7 +226,7 @@ class DocumentUploadPage extends StatelessWidget {
         : const Color(0xFF6B6B6B);
 
     final statusText = isCompleted
-        ? 'Verified'
+        ? 'Pending Approval'
         : isFailed
         ? 'Failed — re-upload'
         : 'Not uploaded';

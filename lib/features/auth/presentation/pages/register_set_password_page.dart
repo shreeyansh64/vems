@@ -31,7 +31,7 @@ class _RegisterSetPasswordPageState extends State<RegisterSetPasswordPage> {
     return BlocConsumer<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state.status == RegisterStatus.setPassword) {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             PageRouteBuilder(
               pageBuilder: (_, __, ___) => const LoginPage(),
