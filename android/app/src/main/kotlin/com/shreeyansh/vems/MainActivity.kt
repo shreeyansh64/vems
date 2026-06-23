@@ -1,4 +1,4 @@
-package com.example.vems
+package com.shreeyansh.vems
 
 import io.flutter.embedding.android.FlutterActivity
 
