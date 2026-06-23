@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:vems/features/documents/domain/model/document_model.dart';
+import 'package:vems/features/documents/domain/model/registration_model.dart';
 
 abstract class DocumentRepository {
   Future<DocumentModel> uploadDocument(String documentType, File file);
-  Future<String> submitRegistration(int vehicleId);
+  Future<RegistrationModel> submitRegistration(int vehicleId);
 }

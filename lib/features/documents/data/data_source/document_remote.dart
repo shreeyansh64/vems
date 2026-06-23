@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:vems/features/documents/domain/model/document_model.dart';
+import 'package:vems/features/documents/domain/model/registration_model.dart';
 
 class DocumentRemote {
   final Dio dio;
@@ -26,15 +27,17 @@ class DocumentRemote {
     }
   }
 
-  Future<String> submitRegistration(int vehicleId) async {
+  Future<RegistrationModel> submitRegistration(int vehicleId) async {
     try {
       final response = await dio.post(
         '/api/registrations/',
         data: {'vehicle': vehicleId},
       );
-      return response.data['message'] ?? 'Registration submitted';
+      return RegistrationModel.fromJson(response.data as Map<String, dynamic>);
     } on DioException catch (e) {
-      throw e.response?.data['message'] ?? e.response?.data['vehicle'] ??  'Something went wrong';
+      throw e.response?.data['message'] ??
+          e.response?.data['vehicle'] ??
+          'Something went wrong';
     }
   }
 }

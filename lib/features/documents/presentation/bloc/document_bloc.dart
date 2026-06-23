@@ -13,6 +13,7 @@ class DocumentBloc extends Bloc<DocumentEvent, DocumentState> {
   DocumentBloc({required this.documentRepository})
     : super(DocumentState.initial()) {
     on<UploadDocumentEvent>(onUploadDocumentEvent);
+    on<SubmitRegistrationEvent>(onSubmitRegistrationEvent);
   }
 
   Future onUploadDocumentEvent(
@@ -46,6 +47,31 @@ class DocumentBloc extends Bloc<DocumentEvent, DocumentState> {
           ),
         );
       }
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: DocumentStatus.error,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future onSubmitRegistrationEvent(
+    SubmitRegistrationEvent event,
+    Emitter<DocumentState> emit,
+  ) async {
+    emit(state.copyWith(status: DocumentStatus.loading));
+    try {
+      final message = await documentRepository.submitRegistration(
+        event.vehicleId,
+      );
+      emit(
+        state.copyWith(
+          status: DocumentStatus.registrationSubmitted,
+          message: message,
+        ),
+      );
     } catch (e) {
       emit(
         state.copyWith(
