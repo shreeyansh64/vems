@@ -4,3 +4,5 @@ part of 'dashboard_bloc.dart';
 abstract class DashboardEvent {}
 
 class GetProfileEvent extends DashboardEvent {}
+
+class GetRegistrationStatusEvent extends DashboardEvent {}
