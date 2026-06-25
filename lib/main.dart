@@ -12,6 +12,7 @@ import 'package:vems/features/auth/presentation/pages/register_verify_otp_page.d
 import 'package:vems/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:vems/features/documents/presentation/bloc/document_bloc.dart';
 import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:vems/features/profile/presentation/pages/profile_page.dart';
 import 'package:vems/features/session/presentation/bloc/session_bloc.dart';
 import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
 import 'package:vems/splash_screen.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'VEMS',
-        home: RegisterSetPasswordPage(),
+        home: LoginPage(),
       ),
     );
   }

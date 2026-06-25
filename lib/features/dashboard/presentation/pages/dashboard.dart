@@ -12,6 +12,17 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  static const Color _ground = Color(0xFFF4F7FC);
+  static const Color _panel = Color(0xFF0C1A2E);
+  static const Color _ink = Color(0xFF0C1A2E);
+  static const Color _muted = Color(0xFF5A6B85);
+  static const Color _hint = Color(0xFF9AA8BF);
+  static const Color _hairline = Color(0xFFE4E9F2);
+  static const Color _accent = Color(0xFF1E50E5);
+  static const Color _green = Color(0xFF34D399);
+  static const Color _onPanelMuted = Color(0xFF8497B5);
+  static const String _mono = 'monospace';
+
   @override
   void initState() {
     super.initState();
@@ -24,11 +35,11 @@ class _DashboardState extends State<Dashboard> {
       builder: (context, state) {
         if (state.status == DashboardStatus.loading) {
           return const Scaffold(
-            backgroundColor: Color(0xFF0D0D0D),
+            backgroundColor: _ground,
             body: Center(
               child: CupertinoActivityIndicator(
                 radius: 14,
-                color: Color(0xFFFFAB00),
+                color: _accent,
               ),
             ),
           );
@@ -37,109 +48,156 @@ class _DashboardState extends State<Dashboard> {
         final registrations = state.registration ?? [];
 
         return Scaffold(
-          backgroundColor: const Color(0xFF0D0D0D),
+          backgroundColor: _ground,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── Header with gradient ──────────────────────────────────
               Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [Color(0xFF1C1A14), Color(0xFF0D0D0D)],
+                decoration: BoxDecoration(
+                  gradient: const RadialGradient(
+                    center: Alignment(0.7, -1.2),
+                    radius: 1.4,
+                    colors: [Color(0xFF163056), _panel],
                   ),
-                  border: Border(
-                    bottom: BorderSide(color: Color(0xFF222222), width: 1),
-                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: _panel.withValues(alpha: 0.30),
+                      blurRadius: 24,
+                      offset: const Offset(0, 10),
+                    ),
+                  ],
                 ),
                 child: SafeArea(
                   bottom: false,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 28, 24, 24),
+                    padding: const EdgeInsets.fromLTRB(22, 22, 22, 20),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Amber accent stripe
                         Container(
-                          width: 4,
-                          height: 36,
-                          margin: const EdgeInsets.only(right: 14),
+                          width: 38,
+                          height: 38,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFFFAB00),
-                            borderRadius: BorderRadius.circular(2),
+                            borderRadius: BorderRadius.circular(11),
+                            gradient: const LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [Color(0xFF2A5BFF), Color(0xFF1230A8)],
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(
+                                  0xFF2A5BFF,
+                                ).withValues(alpha: 0.6),
+                                blurRadius: 14,
+                                offset: const Offset(0, 6),
+                              ),
+                            ],
+                          ),
+                          child: const Icon(
+                            Icons.directions_car_rounded,
+                            color: Colors.white,
+                            size: 20,
                           ),
                         ),
+                        const SizedBox(width: 12),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
                             Text(
                               'VEMS',
                               style: TextStyle(
-                                fontSize: 28,
+                                fontFamily: _mono,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w800,
-                                color: Color(0xFFE0E0E0),
-                                letterSpacing: 1,
+                                color: Colors.white,
+                                letterSpacing: 3.0,
                               ),
                             ),
                             SizedBox(height: 2),
                             Text(
-                              'Vehicle Entry Management System',
+                              'VEHICLE ENTRY MANAGEMENT',
                               style: TextStyle(
-                                fontSize: 12,
-                                color: Color(0xFF5A5A5A),
-                                letterSpacing: 0.3,
+                                fontFamily: _mono,
+                                fontSize: 9,
+                                color: _onPanelMuted,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 1.6,
                               ),
                             ),
                           ],
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 9,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: _green.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(999),
+                            border: Border.all(
+                              color: _green.withValues(alpha: 0.35),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              _Dot(color: _green, size: 6),
+                              SizedBox(width: 6),
+                              Text(
+                                'LIVE',
+                                style: TextStyle(
+                                  fontFamily: _mono,
+                                  color: Color(0xFFBFF3D6),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 1.0,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
-
-              // ── Body ──────────────────────────────────────────────────
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(24, 32, 24, 24),
+                  padding: const EdgeInsets.fromLTRB(22, 28, 22, 24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Section label + divider
                       Row(
                         children: [
                           const Text(
                             'REGISTRATION STATUS',
                             style: TextStyle(
+                              fontFamily: _mono,
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
-                              color: Color(0xFF4A4A4A),
+                              color: _muted,
                               letterSpacing: 1.4,
                             ),
                           ),
                           const SizedBox(width: 12),
                           Expanded(
-                            child: Container(
-                              height: 1,
-                              color: const Color(0xFF1E1E1E),
-                            ),
+                            child: Container(height: 1, color: _hairline),
                           ),
                         ],
                       ),
                       const SizedBox(height: 20),
-
-                      // Content
                       if (state.status == DashboardStatus.error)
                         Text(
                           state.errorMessage ?? 'Something went wrong',
-                          style: const TextStyle(color: Color(0xFFCF6679)),
+                          style: const TextStyle(color: Color(0xFFDC2626)),
                         )
                       else if (registrations.isEmpty)
-                        const Text(
+                        Text(
                           'No registrations found',
-                          style: TextStyle(color: Color(0xFF6B6B6B)),
+                          style: const TextStyle(color: _hint),
                         )
                       else
                         ...registrations.map(
@@ -166,19 +224,23 @@ class _DashboardState extends State<Dashboard> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: const Color(0xFF141414),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF1E1E1E)),
+        border: Border.all(color: _hairline, width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: _panel.withValues(alpha: 0.06),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       clipBehavior: Clip.hardEdge,
       child: IntrinsicHeight(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Left accent bar
             Container(width: 4, color: color),
-
-            // Card content
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -190,7 +252,7 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: color.withOpacity(0.1),
+                            color: color.withValues(alpha: 0.10),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(
@@ -215,7 +277,7 @@ class _DashboardState extends State<Dashboard> {
                       _statusDescription(status),
                       style: const TextStyle(
                         fontSize: 13,
-                        color: Color(0xFF6B6B6B),
+                        color: _muted,
                         height: 1.5,
                       ),
                     ),
@@ -225,17 +287,17 @@ class _DashboardState extends State<Dashboard> {
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFCF6679).withOpacity(0.08),
+                          color: const Color(0xFFDC2626).withValues(alpha: 0.06),
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                            color: const Color(0xFFCF6679).withOpacity(0.2),
+                            color: const Color(0xFFDC2626).withValues(alpha: 0.2),
                           ),
                         ),
                         child: Text(
                           registration.rejectionReason!,
                           style: const TextStyle(
                             fontSize: 13,
-                            color: Color(0xFFCF6679),
+                            color: Color(0xFFDC2626),
                             height: 1.4,
                           ),
                         ),
@@ -254,18 +316,18 @@ class _DashboardState extends State<Dashboard> {
   Color _statusColor(String status) {
     switch (status) {
       case 'APPROVED':
-        return const Color(0xFF4CAF50);
+        return const Color(0xFF34D399);
       case 'REJECTED':
-        return const Color(0xFFCF6679);
+        return const Color(0xFFDC2626);
       default:
-        return const Color(0xFFFFAB00);
+        return const Color(0xFF1E50E5);
     }
   }
 
   IconData _statusIcon(String status) {
     switch (status) {
       case 'APPROVED':
-        return Icons.check_circle_outline;
+        return Icons.check_circle_outline_rounded;
       case 'REJECTED':
         return Icons.cancel_outlined;
       default:
@@ -293,5 +355,20 @@ class _DashboardState extends State<Dashboard> {
       default:
         return "Your application is being reviewed by the admin. You'll receive an email once it's processed.";
     }
+  }
+}
+
+class _Dot extends StatelessWidget {
+  final Color color;
+  final double size;
+  const _Dot({required this.color, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+    );
   }
 }

@@ -20,33 +20,47 @@ class _DashboardBottomNavbarState extends State<DashboardBottomNavbar> {
     DashboardProfilePage(),
   ];
 
+  static const Color _ground = Color(0xFFF4F7FC);
+  static const Color _panel = Color(0xFF0C1A2E);
+  static const Color _muted = Color(0xFF5A6B85);
+  static const Color _hairline = Color(0xFFE4E9F2);
+  static const Color _accent = Color(0xFF1E50E5);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0D0D0D),
+      backgroundColor: _ground,
       body: _pages[_index],
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF1A1A1A),
+        decoration: BoxDecoration(
+          color: _ground,
           border: Border(
-            top: BorderSide(color: Color(0xFF2A2A2A), width: 1),
+            top: BorderSide(color: _hairline, width: 1.5),
           ),
+          boxShadow: [
+            BoxShadow(
+              color: _panel.withValues(alpha: 0.06),
+              blurRadius: 16,
+              offset: const Offset(0, -4),
+            ),
+          ],
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 20),
         child: GNav(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           selectedIndex: _index,
           onTabChange: (i) => setState(() => _index = i),
-          backgroundColor: const Color(0xFF1A1A1A),
-          color: const Color(0xFF6B6B6B),
-          activeColor: const Color(0xFFFFAB00),
-          tabBackgroundColor: const Color(0xFF111111),
-          gap: 10,
+          backgroundColor: _ground,
+          color: _muted,
+          activeColor: _accent,
+          tabBackgroundColor: _accent.withValues(alpha: 0.08),
+          gap: 8,
+          iconSize: 22,
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
           tabs: const [
-            GButton(icon: Icons.home_sharp, text: 'Home'),
-            GButton(icon: Icons.directions_car_outlined, text: 'Vehicles'),
-            GButton(icon: Icons.person, text: 'Profile'),
+            GButton(icon: Icons.home_rounded, text: 'Home'),
+            GButton(icon: Icons.directions_car_rounded, text: 'Vehicles'),
+            GButton(icon: Icons.person_rounded, text: 'Profile'),
           ],
         ),
       ),

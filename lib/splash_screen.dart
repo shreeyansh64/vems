@@ -5,6 +5,8 @@ import 'package:vems/app_root.dart';
 import 'package:vems/features/session/presentation/bloc/session_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -32,6 +34,15 @@ class _SplashScreenState extends State<SplashScreen>
   late final Animation<double> _textOpacity;
 
   bool _verified = false;
+
+  // ── VEMS console palette ─────────────────────────────────────
+  static const Color _bg = Color(0xFF0C1A2E);
+  static const Color _bgDeep = Color(0xFF07101F);
+  static const Color _bgLift = Color(0xFF15294A);
+  static const Color _cobalt = Color(0xFF2A5BFF);
+  static const Color _cobaltSoft = Color(0xFF5FA0FF);
+  static const Color _green = Color(0xFF34D399);
+  static const String _mono = 'monospace';
 
   @override
   void initState() {
@@ -152,12 +163,13 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    const amber = Color(0xFFFFAB00);
-    const bg = Color(0xFF0D0D0D);
     const logoSize = 200.0;
 
+    // accent shifts cobalt → green the moment verification lands
+    final Color accent = _verified ? _green : _cobalt;
+
     return Scaffold(
-      backgroundColor: bg,
+      backgroundColor: _bg,
       body: AnimatedBuilder(
         animation: Listenable.merge([
           _logoController,
@@ -170,9 +182,23 @@ class _SplashScreenState extends State<SplashScreen>
             opacity: _exitOpacity,
             child: Stack(
               children: [
+                // depth gradient ground
+                const Positioned.fill(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: RadialGradient(
+                        center: Alignment(0, -0.35),
+                        radius: 1.1,
+                        colors: [_bgLift, _bg, _bgDeep],
+                        stops: [0.0, 0.55, 1.0],
+                      ),
+                    ),
+                  ),
+                ),
+
                 CustomPaint(
                   size: size,
-                  painter: _GridPainter(opacity: _logoOpacity.value * 0.06),
+                  painter: _GridPainter(opacity: _logoOpacity.value * 0.05),
                 ),
 
                 Center(
@@ -185,6 +211,23 @@ class _SplashScreenState extends State<SplashScreen>
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
+                            // soft glow behind the mark (warms on verify)
+                            Container(
+                              width: logoSize + 70,
+                              height: logoSize + 70,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: RadialGradient(
+                                  colors: [
+                                    accent.withOpacity(
+                                        0.28 * _logoOpacity.value),
+                                    accent.withOpacity(0.0),
+                                  ],
+                                  stops: const [0.0, 1.0],
+                                ),
+                              ),
+                            ),
+
                             if (_verified)
                               ScaleTransition(
                                 scale: _ringScale,
@@ -196,7 +239,7 @@ class _SplashScreenState extends State<SplashScreen>
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: amber,
+                                        color: _green,
                                         width: 2,
                                       ),
                                     ),
@@ -214,8 +257,8 @@ class _SplashScreenState extends State<SplashScreen>
                                   child: CustomPaint(
                                     painter: _BracketPainter(
                                       color: _verified
-                                          ? amber
-                                          : amber.withOpacity(0.5),
+                                          ? _green
+                                          : _cobaltSoft.withOpacity(0.7),
                                     ),
                                   ),
                                 ),
@@ -249,10 +292,16 @@ class _SplashScreenState extends State<SplashScreen>
                                     gradient: LinearGradient(
                                       colors: [
                                         Colors.transparent,
-                                        amber.withOpacity(0.9),
+                                        _cobaltSoft.withOpacity(0.95),
                                         Colors.transparent,
                                       ],
                                     ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: _cobaltSoft.withOpacity(0.5),
+                                        blurRadius: 8,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -272,19 +321,20 @@ class _SplashScreenState extends State<SplashScreen>
                                   ? Row(
                                       key: const ValueKey('verified'),
                                       mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const Icon(
+                                      children: const [
+                                        Icon(
                                           Icons.verified_rounded,
-                                          color: amber,
+                                          color: _green,
                                           size: 16,
                                         ),
-                                        const SizedBox(width: 6),
+                                        SizedBox(width: 6),
                                         Text(
                                           'SYSTEM READY',
                                           style: TextStyle(
+                                            fontFamily: _mono,
                                             fontSize: 11,
                                             fontWeight: FontWeight.w700,
-                                            color: amber,
+                                            color: _green,
                                             letterSpacing: 3.0,
                                           ),
                                         ),
@@ -299,16 +349,17 @@ class _SplashScreenState extends State<SplashScreen>
                                           height: 10,
                                           child: CircularProgressIndicator(
                                             strokeWidth: 1.5,
-                                            color: amber.withOpacity(0.6),
+                                            color: _cobaltSoft.withOpacity(0.7),
                                           ),
                                         ),
                                         const SizedBox(width: 8),
                                         Text(
-                                          'INITIALIZING',
+                                          'VERIFYING',
                                           style: TextStyle(
+                                            fontFamily: _mono,
                                             fontSize: 11,
                                             fontWeight: FontWeight.w600,
-                                            color: amber.withOpacity(0.5),
+                                            color: _cobaltSoft.withOpacity(0.7),
                                             letterSpacing: 3.0,
                                           ),
                                         ),
@@ -316,15 +367,16 @@ class _SplashScreenState extends State<SplashScreen>
                                     ),
                             ),
 
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 12),
 
                             Text(
-                              'AKGEC · Vehicle Entry Management',
+                              'AKGEC · VEHICLE ENTRY MANAGEMENT',
                               style: TextStyle(
-                                fontSize: 11,
-                                color: Colors.white.withOpacity(0.2),
-                                letterSpacing: 1.2,
-                                fontWeight: FontWeight.w400,
+                                fontFamily: _mono,
+                                fontSize: 10,
+                                color: Colors.white.withOpacity(0.32),
+                                letterSpacing: 2.0,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ],
@@ -334,14 +386,24 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 ),
 
+                // bottom progress rail — cobalt while scanning, green when ready
                 Positioned(
                   bottom: 0,
                   left: 0,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 100),
-                    height: 2,
+                    height: 3,
                     width: size.width * _scanController.value,
-                    color: amber,
+                    decoration: BoxDecoration(
+                      color: _verified ? _green : _cobalt,
+                      boxShadow: [
+                        BoxShadow(
+                          color: (_verified ? _green : _cobalt)
+                              .withOpacity(0.6),
+                          blurRadius: 8,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -361,25 +423,27 @@ class _BracketPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = color
-      ..strokeWidth = 2.0
+      ..strokeWidth = 2.5
       ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.square;
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round;
 
-    const len = 20.0;
+    const len = 26.0;
 
+    // top-left
     canvas.drawLine(Offset(0, len), Offset.zero, paint);
     canvas.drawLine(Offset.zero, Offset(len, 0), paint);
-
+    // top-right
     canvas.drawLine(Offset(size.width - len, 0), Offset(size.width, 0), paint);
     canvas.drawLine(Offset(size.width, 0), Offset(size.width, len), paint);
-
+    // bottom-left
     canvas.drawLine(
       Offset(0, size.height - len),
       Offset(0, size.height),
       paint,
     );
     canvas.drawLine(Offset(0, size.height), Offset(len, size.height), paint);
-
+    // bottom-right
     canvas.drawLine(
       Offset(size.width - len, size.height),
       Offset(size.width, size.height),
@@ -404,7 +468,7 @@ class _GridPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (opacity <= 0) return;
     final paint = Paint()
-      ..color = const Color(0xFFFFAB00).withOpacity(opacity)
+      ..color = const Color(0xFF5FA0FF).withOpacity(opacity)
       ..strokeWidth = 0.5;
 
     const spacing = 40.0;

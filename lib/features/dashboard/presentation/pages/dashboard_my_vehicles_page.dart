@@ -12,6 +12,14 @@ class MyVehiclesPage extends StatefulWidget {
 }
 
 class _MyVehiclesPageState extends State<MyVehiclesPage> {
+  static const Color _ground = Color(0xFFF4F7FC);
+  static const Color _panel = Color(0xFF0C1A2E);
+  static const Color _ink = Color(0xFF0C1A2E);
+  static const Color _muted = Color(0xFF5A6B85);
+  static const Color _hint = Color(0xFF9AA8BF);
+  static const Color _hairline = Color(0xFFE4E9F2);
+  static const Color _accent = Color(0xFF1E50E5);
+  static const String _mono = 'monospace';
 
   @override
   void initState() {
@@ -22,18 +30,25 @@ class _MyVehiclesPageState extends State<MyVehiclesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0D0D0D),
+      backgroundColor: _ground,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0D0D0D),
-        foregroundColor: const Color(0xFFE0E0E0),
-        title: const Text(
-          'My Vehicles',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-        ),
+        backgroundColor: _ground,
+        foregroundColor: _ink,
         elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          'MY VEHICLES',
+          style: TextStyle(
+            fontFamily: _mono,
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+            color: _ink,
+            letterSpacing: 2.0,
+          ),
+        ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
-          child: Container(height: 1, color: const Color(0xFF1E1E1E)),
+          child: Container(height: 1, color: _hairline),
         ),
       ),
       body: BlocBuilder<DashboardBloc, DashboardState>(
@@ -42,7 +57,7 @@ class _MyVehiclesPageState extends State<MyVehiclesPage> {
             return const Center(
               child: CupertinoActivityIndicator(
                 radius: 14,
-                color: Color(0xFFFFAB00),
+                color: _accent,
               ),
             );
           }
@@ -51,7 +66,7 @@ class _MyVehiclesPageState extends State<MyVehiclesPage> {
             return Center(
               child: Text(
                 state.errorMessage ?? 'Something went wrong',
-                style: const TextStyle(color: Color(0xFF6B6B6B)),
+                style: const TextStyle(color: _muted, fontSize: 14),
               ),
             );
           }
@@ -62,13 +77,13 @@ class _MyVehiclesPageState extends State<MyVehiclesPage> {
             return const Center(
               child: Text(
                 'No vehicles added yet',
-                style: TextStyle(color: Color(0xFF6B6B6B), fontSize: 14),
+                style: TextStyle(color: _hint, fontSize: 14),
               ),
             );
           }
 
           return ListView.separated(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.fromLTRB(22, 24, 22, 24),
             itemCount: vehicles.length,
             separatorBuilder: (_, __) => const SizedBox(height: 12),
             itemBuilder: (context, index) {
@@ -86,16 +101,23 @@ class _VehicleCard extends StatelessWidget {
   final VehicleModel vehicle;
   const _VehicleCard({required this.vehicle});
 
+  static const Color _panel = Color(0xFF0C1A2E);
+  static const Color _ink = Color(0xFF0C1A2E);
+  static const Color _muted = Color(0xFF5A6B85);
+  static const Color _hairline = Color(0xFFE4E9F2);
+  static const Color _accent = Color(0xFF1E50E5);
+  static const String _mono = 'monospace';
+
   IconData get _icon {
     switch (vehicle.vehicleType) {
       case 'CAR':
-        return Icons.directions_car_outlined;
+        return Icons.directions_car_rounded;
       case 'BIKE':
-        return Icons.two_wheeler_outlined;
+        return Icons.two_wheeler_rounded;
       case 'SCOOTY':
-        return Icons.electric_scooter_outlined;
+        return Icons.electric_scooter_rounded;
       default:
-        return Icons.directions_car_outlined;
+        return Icons.directions_car_rounded;
     }
   }
 
@@ -104,19 +126,26 @@ class _VehicleCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF141414),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF1E1E1E)),
+        border: Border.all(color: _hairline, width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: _panel.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFFFAB00).withOpacity(0.1),
+              color: _accent.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(_icon, color: const Color(0xFFFFAB00), size: 22),
+            child: Icon(_icon, color: _accent, size: 22),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -126,10 +155,11 @@ class _VehicleCard extends StatelessWidget {
                 Text(
                   vehicle.vehicleNumber,
                   style: const TextStyle(
+                    fontFamily: _mono,
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: Color(0xFFE0E0E0),
-                    letterSpacing: 0.5,
+                    color: _ink,
+                    letterSpacing: 0.8,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -137,24 +167,28 @@ class _VehicleCard extends StatelessWidget {
                   '${vehicle.vehicleModel} · ${vehicle.vehicleColor}',
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Color(0xFF6B6B6B),
+                    color: _muted,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
             decoration: BoxDecoration(
-              color: const Color(0xFF1E1E1E),
+              color: _accent.withValues(alpha: 0.07),
               borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: _accent.withValues(alpha: 0.18),
+              ),
             ),
             child: Text(
               vehicle.vehicleType,
               style: const TextStyle(
+                fontFamily: _mono,
                 fontSize: 10,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF4A4A4A),
+                color: _accent,
                 letterSpacing: 0.8,
               ),
             ),
