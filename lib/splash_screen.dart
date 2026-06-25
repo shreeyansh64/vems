@@ -35,7 +35,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   bool _verified = false;
 
-  // ── VEMS console palette ─────────────────────────────────────
   static const Color _bg = Color(0xFF0C1A2E);
   static const Color _bgDeep = Color(0xFF07101F);
   static const Color _bgLift = Color(0xFF15294A);
@@ -165,7 +164,6 @@ class _SplashScreenState extends State<SplashScreen>
     final size = MediaQuery.of(context).size;
     const logoSize = 200.0;
 
-    // accent shifts cobalt → green the moment verification lands
     final Color accent = _verified ? _green : _cobalt;
 
     return Scaffold(
@@ -182,7 +180,6 @@ class _SplashScreenState extends State<SplashScreen>
             opacity: _exitOpacity,
             child: Stack(
               children: [
-                // depth gradient ground
                 const Positioned.fill(
                   child: DecoratedBox(
                     decoration: BoxDecoration(
@@ -211,7 +208,6 @@ class _SplashScreenState extends State<SplashScreen>
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            // soft glow behind the mark (warms on verify)
                             Container(
                               width: logoSize + 70,
                               height: logoSize + 70,
@@ -386,7 +382,6 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 ),
 
-                // bottom progress rail — cobalt while scanning, green when ready
                 Positioned(
                   bottom: 0,
                   left: 0,

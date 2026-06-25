@@ -5,18 +5,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:vems/core/di/injection.dart';
 import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
-import 'package:vems/features/auth/presentation/pages/login_page.dart';
-import 'package:vems/features/auth/presentation/pages/register_email.dart';
-import 'package:vems/features/auth/presentation/pages/register_set_password_page.dart';
-import 'package:vems/features/auth/presentation/pages/register_verify_otp_page.dart';
 import 'package:vems/features/dashboard/presentation/bloc/dashboard_bloc.dart';
-import 'package:vems/features/dashboard/presentation/pages/dashboard_bottom_navbar.dart';
 import 'package:vems/features/documents/presentation/bloc/document_bloc.dart';
 import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:vems/features/profile/presentation/pages/profile_page.dart';
 import 'package:vems/features/session/presentation/bloc/session_bloc.dart';
 import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
 import 'package:vems/splash_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +42,7 @@ class MyApp extends StatelessWidget {
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'VEMS',
-        home: DashboardBottomNavbar(),
+        home: SplashScreen(),
       ),
     );
   }

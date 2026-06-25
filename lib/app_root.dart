@@ -29,18 +29,16 @@ class _AppRootState extends State<AppRoot> {
           case SessionStatus.initial:
           case SessionStatus.loading:
             return const Scaffold(
-              backgroundColor: Color(0xFF0D0D0D),
+              backgroundColor: Color(0xFFF4F7FC),
               body: Center(
                 child: CupertinoActivityIndicator(
                   radius: 14,
-                  color: Color(0xFFFFAB00),
+                  color: Color(0xFF1E50E5),
                 ),
               ),
             );
           case SessionStatus.authenticated:
-            if (state.role == "STAFF") {
-              return const ScannerPage(number: '');
-            }
+            if (state.role == 'STAFF') return const ScannerPage(number: '');
             return const DashboardBottomNavbar();
           case SessionStatus.unauthenticated:
             return const LoginPage();
