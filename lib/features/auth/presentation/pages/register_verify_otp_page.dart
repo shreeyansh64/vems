@@ -26,18 +26,16 @@ class _RegisterVerifyOtpPageState extends State<RegisterVerifyOtpPage> {
     return BlocConsumer<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state.status == RegisterStatus.verifyOtp) {
-          Navigator.push(
-  context,
-  PageRouteBuilder(
-    pageBuilder: (_, __, ___) => const RegisterSetPasswordPage(),
-    transitionsBuilder: (_, animation, __, child) {
-      return FadeTransition(
-        opacity: animation,
-        child: child,
-      );
-    },
-  ),
-);
+          Navigator.pushAndRemoveUntil(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (_, __, ___) => const RegisterSetPasswordPage(),
+              transitionsBuilder: (_, animation, __, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+            ),
+            (route) => false,
+          );
         } else if (state.status == RegisterStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -88,10 +86,10 @@ class _RegisterVerifyOtpPageState extends State<RegisterVerifyOtpPage> {
           child: Scaffold(
             backgroundColor: const Color(0xFF0D0D0D),
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               backgroundColor: const Color(0xFF0D0D0D),
               elevation: 0,
               centerTitle: true,
-              leading: const BackButton(color: Color(0xFFE0E0E0)),
               title: const Text(
                 'Verify OTP',
                 style: TextStyle(

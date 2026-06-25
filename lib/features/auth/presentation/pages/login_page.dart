@@ -54,10 +54,10 @@ class _LoginPageState extends State<LoginPage> {
           child: Scaffold(
             backgroundColor: const Color(0xFF0D0D0D),
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               backgroundColor: const Color(0xFF0D0D0D),
               elevation: 0,
               centerTitle: true,
-              leading: const BackButton(color: Color(0xFFE0E0E0)),
               title: const Text(
                 'Login',
                 style: TextStyle(

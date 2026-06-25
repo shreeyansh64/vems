@@ -2,17 +2,14 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:vems/app_root.dart';
 import 'package:vems/core/di/injection.dart';
 import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
 import 'package:vems/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:vems/features/documents/presentation/bloc/document_bloc.dart';
 import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:vems/scanner_page.dart';
 import 'package:vems/features/session/presentation/bloc/session_bloc.dart';
 import 'package:vems/features/vehicle/presentation/bloc/vehicle_bloc.dart';
-import 'package:vems/scanner.dart';
 import 'package:vems/splash_screen.dart';
 
 void main() async {
