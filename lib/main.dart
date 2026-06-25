@@ -6,6 +6,9 @@ import 'package:vems/core/di/injection.dart';
 import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:vems/features/auth/presentation/bloc/register_bloc.dart';
 import 'package:vems/features/auth/presentation/pages/login_page.dart';
+import 'package:vems/features/auth/presentation/pages/register_email.dart';
+import 'package:vems/features/auth/presentation/pages/register_set_password_page.dart';
+import 'package:vems/features/auth/presentation/pages/register_verify_otp_page.dart';
 import 'package:vems/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:vems/features/documents/presentation/bloc/document_bloc.dart';
 import 'package:vems/features/profile/presentation/bloc/profile_bloc.dart';
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'VEMS',
-        home: LoginPage(),
+        home: RegisterSetPasswordPage(),
       ),
     );
   }
