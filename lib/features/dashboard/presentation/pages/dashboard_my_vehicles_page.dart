@@ -13,7 +13,6 @@ class MyVehiclesPage extends StatefulWidget {
 
 class _MyVehiclesPageState extends State<MyVehiclesPage> {
   static const Color _ground = Color(0xFFF4F7FC);
-  static const Color _panel = Color(0xFF0C1A2E);
   static const Color _ink = Color(0xFF0C1A2E);
   static const Color _muted = Color(0xFF5A6B85);
   static const Color _hint = Color(0xFF9AA8BF);
