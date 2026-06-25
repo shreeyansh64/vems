@@ -138,11 +138,11 @@ class _SplashScreenState extends State<SplashScreen>
     if (mounted) {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) => BlocProvider.value(
+          pageBuilder: (_, _, _) => BlocProvider.value(
             value: context.read<SessionBloc>(),
             child: AppRoot(),
           ),
-          transitionsBuilder: (_, animation, __, child) =>
+          transitionsBuilder: (_, animation, _, child) =>
               FadeTransition(opacity: animation, child: child),
           transitionDuration: const Duration(milliseconds: 400),
         ),

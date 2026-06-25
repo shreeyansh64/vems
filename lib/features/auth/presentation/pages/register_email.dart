@@ -41,8 +41,8 @@ class _RegisterEmailState extends State<RegisterEmail> {
           Navigator.push(
             context,
             PageRouteBuilder(
-              pageBuilder: (_, __, ___) => const RegisterVerifyOtpPage(),
-              transitionsBuilder: (_, animation, __, child) {
+              pageBuilder: (_, _, _) => const RegisterVerifyOtpPage(),
+              transitionsBuilder: (_, animation, _, child) {
                 return FadeTransition(opacity: animation, child: child);
               },
             ),
@@ -446,10 +446,10 @@ class _RegisterEmailState extends State<RegisterEmail> {
                               Navigator.push(
                                 context,
                                 PageRouteBuilder(
-                                  pageBuilder: (_, __, ___) =>
+                                  pageBuilder: (_, _, _) =>
                                       const LoginPage(),
                                   transitionsBuilder:
-                                      (_, animation, __, child) {
+                                      (_, animation, _, child) {
                                         return FadeTransition(
                                           opacity: animation,
                                           child: child,

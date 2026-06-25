@@ -41,8 +41,8 @@ class _RegisterVerifyOtpPageState extends State<RegisterVerifyOtpPage> {
           Navigator.pushAndRemoveUntil(
             context,
             PageRouteBuilder(
-              pageBuilder: (_, __, ___) => const RegisterSetPasswordPage(),
-              transitionsBuilder: (_, animation, __, child) {
+              pageBuilder: (_, _, _) => const RegisterSetPasswordPage(),
+              transitionsBuilder: (_, animation, _, child) {
                 return FadeTransition(opacity: animation, child: child);
               },
             ),

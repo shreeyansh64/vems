@@ -40,7 +40,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
 
       final profile = await dashboardRepository.getProfile();
 
-      if (profile.firstName == null || profile.firstName!.trim().isEmpty) {
+      if (profile.firstName.trim().isEmpty) {
         emit(
           state.copyWith(status: SessionStatus.profileIncomplete, role: role),
         );

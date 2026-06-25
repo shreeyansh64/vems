@@ -107,10 +107,10 @@ class _DashboardProfilePageState extends State<DashboardProfilePage> {
                                 Navigator.push(
                                   context,
                                   PageRouteBuilder(
-                                    pageBuilder: (_, __, ___) =>
+                                    pageBuilder: (_, _, _) =>
                                         const ProfilePage(),
                                     transitionsBuilder:
-                                        (_, animation, __, child) {
+                                        (_, animation, _, child) {
                                           return FadeTransition(
                                             opacity: animation,
                                             child: child,
@@ -223,9 +223,9 @@ class _DashboardProfilePageState extends State<DashboardProfilePage> {
                           Navigator.push(
                             context,
                             PageRouteBuilder(
-                              pageBuilder: (_, __, ___) =>
+                              pageBuilder: (_, _, _) =>
                                   const MyVehiclesPage(),
-                              transitionsBuilder: (_, animation, __, child) =>
+                              transitionsBuilder: (_, animation, _, child) =>
                                   FadeTransition(
                                     opacity: animation,
                                     child: child,
@@ -242,9 +242,9 @@ class _DashboardProfilePageState extends State<DashboardProfilePage> {
                           Navigator.push(
                             context,
                             PageRouteBuilder(
-                              pageBuilder: (_, __, ___) =>
+                              pageBuilder: (_, _, _) =>
                                   const VehicleSubmitPage(),
-                              transitionsBuilder: (_, animation, __, child) =>
+                              transitionsBuilder: (_, animation, _, child) =>
                                   FadeTransition(
                                     opacity: animation,
                                     child: child,
@@ -266,8 +266,8 @@ class _DashboardProfilePageState extends State<DashboardProfilePage> {
                             Navigator.pushAndRemoveUntil(
                               context,
                               PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => const LoginPage(),
-                                transitionsBuilder: (_, animation, __, child) =>
+                                pageBuilder: (_, _, _) => const LoginPage(),
+                                transitionsBuilder: (_, animation, _, child) =>
                                     FadeTransition(
                                       opacity: animation,
                                       child: child,

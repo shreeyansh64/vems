@@ -83,8 +83,8 @@ class _VehicleSubmitPageState extends State<VehicleSubmitPage> {
               Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const DocumentUploadPage(),
-                  transitionsBuilder: (_, animation, __, child) =>
+                  pageBuilder: (_, _, _) => const DocumentUploadPage(),
+                  transitionsBuilder: (_, animation, _, child) =>
                       FadeTransition(opacity: animation, child: child),
                 ),
               );

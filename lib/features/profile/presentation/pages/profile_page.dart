@@ -91,8 +91,8 @@ class _ProfilePageState extends State<ProfilePage> {
               Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => const DashboardBottomNavbar(),
-                  transitionsBuilder: (_, animation, __, child) {
+                  pageBuilder: (_, _, _) => const DashboardBottomNavbar(),
+                  transitionsBuilder: (_, animation, _, child) {
                     return FadeTransition(opacity: animation, child: child);
                   },
                 ),

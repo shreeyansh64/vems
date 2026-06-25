@@ -56,8 +56,8 @@ class _LoginPageState extends State<LoginPage>
           Navigator.pushAndRemoveUntil(
             context,
             PageRouteBuilder(
-              pageBuilder: (_, __, ___) => const AppRoot(),
-              transitionsBuilder: (_, animation, __, child) {
+              pageBuilder: (_, _, _) => const AppRoot(),
+              transitionsBuilder: (_, animation, _, child) {
                 return FadeTransition(opacity: animation, child: child);
               },
             ),
@@ -412,10 +412,10 @@ class _LoginPageState extends State<LoginPage>
                               Navigator.push(
                                 context,
                                 PageRouteBuilder(
-                                  pageBuilder: (_, __, ___) =>
+                                  pageBuilder: (_, _, _) =>
                                       const RegisterEmail(),
                                   transitionsBuilder:
-                                      (_, animation, __, child) {
+                                      (_, animation, _, child) {
                                         return FadeTransition(
                                           opacity: animation,
                                           child: child,

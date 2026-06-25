@@ -46,8 +46,8 @@ class _RegisterSetPasswordPageState extends State<RegisterSetPasswordPage> {
           Navigator.pushAndRemoveUntil(
             context,
             PageRouteBuilder(
-              pageBuilder: (_, __, ___) => const LoginPage(),
-              transitionsBuilder: (_, animation, __, child) {
+              pageBuilder: (_, _, _) => const LoginPage(),
+              transitionsBuilder: (_, animation, _, child) {
                 return FadeTransition(opacity: animation, child: child);
               },
             ),

@@ -82,8 +82,8 @@ class DocumentUploadPage extends StatelessWidget {
           Navigator.push(
             context,
             PageRouteBuilder(
-              pageBuilder: (_, __, ___) => const DashboardBottomNavbar(),
-              transitionsBuilder: (_, animation, __, child) =>
+              pageBuilder: (_, _, _) => const DashboardBottomNavbar(),
+              transitionsBuilder: (_, animation, _, child) =>
                   FadeTransition(opacity: animation, child: child),
             ),
           );
