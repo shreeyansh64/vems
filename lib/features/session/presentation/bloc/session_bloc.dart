@@ -9,10 +9,8 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   final FlutterSecureStorage storage;
   final DashboardRepository dashboardRepository;
 
-  SessionBloc({
-    required this.storage,
-    required this.dashboardRepository,
-  }) : super(SessionState.initial()) {
+  SessionBloc({required this.storage, required this.dashboardRepository})
+    : super(SessionState.initial()) {
     on<CheckSessionEvent>(_onCheckSession);
     on<ProfileCompletedEvent>(_onProfileCompleted);
   }
@@ -25,17 +23,29 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
 
     try {
       final token = await storage.read(key: 'access_token');
+
       if (token == null) {
         emit(state.copyWith(status: SessionStatus.unauthenticated));
+        return;
+      }
+
+      final role = await dashboardRepository.getMe();
+
+      if (role == "STAFF") {
+        emit(
+          state.copyWith(status: SessionStatus.authenticated, role: role),
+        );
         return;
       }
 
       final profile = await dashboardRepository.getProfile();
 
       if (profile.firstName == null || profile.firstName!.trim().isEmpty) {
-        emit(state.copyWith(status: SessionStatus.profileIncomplete));
+        emit(
+          state.copyWith(status: SessionStatus.profileIncomplete, role: role),
+        );
       } else {
-        emit(state.copyWith(status: SessionStatus.authenticated));
+        emit(state.copyWith(status: SessionStatus.authenticated, role: role));
       }
     } catch (_) {
       emit(state.copyWith(status: SessionStatus.unauthenticated));
@@ -46,6 +56,6 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     ProfileCompletedEvent event,
     Emitter<SessionState> emit,
   ) {
-    emit(state.copyWith(status: SessionStatus.authenticated));
+    emit(state.copyWith(status: SessionStatus.authenticated, role: "USER"));
   }
 }

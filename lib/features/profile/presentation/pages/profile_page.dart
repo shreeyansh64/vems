@@ -28,6 +28,24 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _submit() {
+    if (_firstNameController.text.isEmpty ||
+        _lastNameController.text.isEmpty ||
+        _studentNumberController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: const Color(0xFFCF6679),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          content: Text(
+            'All fields are required',
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+      return;
+    }
     context.read<ProfileBloc>().add(
       SubmitProfileEvent(
         firstName: _firstNameController.text.trim(),

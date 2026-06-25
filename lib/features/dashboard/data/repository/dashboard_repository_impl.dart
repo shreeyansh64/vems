@@ -22,4 +22,9 @@ class DashboardRepositoryImpl implements DashboardRepository {
   Future<List<VehicleModel>> getVehicles() {
     return dashboardRemote.getVehicles();
   }
+  
+  @override
+  Future<String> getMe() {
+    return dashboardRemote.getMe();
+  }
 }

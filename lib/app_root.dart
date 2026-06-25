@@ -5,6 +5,7 @@ import 'package:vems/features/auth/presentation/pages/login_page.dart';
 import 'package:vems/features/dashboard/presentation/pages/dashboard_bottom_navbar.dart';
 import 'package:vems/features/profile/presentation/pages/profile_page.dart';
 import 'package:vems/features/session/presentation/bloc/session_bloc.dart';
+import 'package:vems/scanner_page.dart';
 
 class AppRoot extends StatefulWidget {
   const AppRoot({super.key});
@@ -36,12 +37,15 @@ class _AppRootState extends State<AppRoot> {
                 ),
               ),
             );
+          case SessionStatus.authenticated:
+            if (state.role == "STAFF") {
+              return const ScannerPage(number: '');
+            }
+            return const DashboardBottomNavbar();
           case SessionStatus.unauthenticated:
             return const LoginPage();
           case SessionStatus.profileIncomplete:
             return const ProfilePage();
-          case SessionStatus.authenticated:
-            return const DashboardBottomNavbar();
         }
       },
     );

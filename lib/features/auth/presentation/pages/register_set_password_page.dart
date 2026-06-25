@@ -31,7 +31,7 @@ class _RegisterSetPasswordPageState extends State<RegisterSetPasswordPage> {
     return BlocConsumer<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state.status == RegisterStatus.setPassword) {
-          Navigator.pushReplacement(
+          Navigator.pushAndRemoveUntil(
             context,
             PageRouteBuilder(
               pageBuilder: (_, __, ___) => const LoginPage(),
@@ -39,6 +39,7 @@ class _RegisterSetPasswordPageState extends State<RegisterSetPasswordPage> {
                 return FadeTransition(opacity: animation, child: child);
               },
             ),
+            (route)=> false
           );
         } else if (state.status == RegisterStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(

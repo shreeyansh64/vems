@@ -42,4 +42,13 @@ class DashboardRemote {
       throw e.response?.data['message'] ?? 'Something went wrong';
     }
   }
+
+  Future<String> getMe()async{
+    try {
+      final response = await dio.get('/api/auth/me/');
+      return response.data['role'];
+    } on DioException catch (e) {
+      throw e.response?.data["message"] ?? "Something went wrong";
+    }
+  }
 }

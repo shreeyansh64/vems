@@ -4,9 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vems/app_root.dart';
 import 'package:vems/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:vems/features/auth/presentation/pages/register_email.dart';
-import 'package:vems/features/dashboard/presentation/pages/dashboard.dart';
-import 'package:vems/features/dashboard/presentation/pages/dashboard_bottom_navbar.dart';
-import 'package:vems/features/profile/presentation/pages/profile_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -25,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state.status == LoginStatus.success) {
-          Navigator.push(
+          Navigator.pushAndRemoveUntil(
             context,
             PageRouteBuilder(
               pageBuilder: (_, __, ___) => const AppRoot(),
@@ -33,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
                 return FadeTransition(opacity: animation, child: child);
               },
             ),
+            (route) => false,
           );
         } else if (state.status == LoginStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(

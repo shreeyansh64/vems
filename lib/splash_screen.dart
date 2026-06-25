@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vems/app_root.dart';
+import 'package:vems/features/session/presentation/bloc/session_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
-
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-
   late final AnimationController _scanController;
   late final AnimationController _logoController;
   late final AnimationController _pulseController;
@@ -72,29 +72,38 @@ class _SplashScreenState extends State<SplashScreen>
     );
 
     _bracketOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _scanController,
-          curve: const Interval(0.0, 0.3, curve: Curves.easeOut)),
+      CurvedAnimation(
+        parent: _scanController,
+        curve: const Interval(0.0, 0.3, curve: Curves.easeOut),
+      ),
     );
     _bracketScale = Tween<double>(begin: 1.1, end: 1.0).animate(
-      CurvedAnimation(parent: _scanController,
-          curve: const Interval(0.0, 0.4, curve: Curves.easeOut)),
+      CurvedAnimation(
+        parent: _scanController,
+        curve: const Interval(0.0, 0.4, curve: Curves.easeOut),
+      ),
     );
 
     _textOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _scanController,
-          curve: const Interval(0.7, 1.0, curve: Curves.easeOut)),
+      CurvedAnimation(
+        parent: _scanController,
+        curve: const Interval(0.7, 1.0, curve: Curves.easeOut),
+      ),
     );
 
-    _ringScale = Tween<double>(begin: 1.0, end: 1.35).animate(
-      CurvedAnimation(parent: _pulseController, curve: Curves.easeOut),
-    );
-    _ringOpacity = Tween<double>(begin: 0.5, end: 0.0).animate(
-      CurvedAnimation(parent: _pulseController, curve: Curves.easeOut),
-    );
+    _ringScale = Tween<double>(
+      begin: 1.0,
+      end: 1.35,
+    ).animate(CurvedAnimation(parent: _pulseController, curve: Curves.easeOut));
+    _ringOpacity = Tween<double>(
+      begin: 0.5,
+      end: 0.0,
+    ).animate(CurvedAnimation(parent: _pulseController, curve: Curves.easeOut));
 
-    _exitOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
-      CurvedAnimation(parent: _exitController, curve: Curves.easeIn),
-    );
+    _exitOpacity = Tween<double>(
+      begin: 1.0,
+      end: 0.0,
+    ).animate(CurvedAnimation(parent: _exitController, curve: Curves.easeIn));
 
     _runSequence();
   }
@@ -119,7 +128,10 @@ class _SplashScreenState extends State<SplashScreen>
     if (mounted) {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) => AppRoot(),
+          pageBuilder: (_, __, ___) => BlocProvider.value(
+            value: context.read<SessionBloc>(),
+            child: AppRoot(),
+          ),
           transitionsBuilder: (_, animation, __, child) =>
               FadeTransition(opacity: animation, child: child),
           transitionDuration: const Duration(milliseconds: 400),
@@ -158,7 +170,6 @@ class _SplashScreenState extends State<SplashScreen>
             opacity: _exitOpacity,
             child: Stack(
               children: [
-
                 CustomPaint(
                   size: size,
                   painter: _GridPainter(opacity: _logoOpacity.value * 0.06),
@@ -168,14 +179,12 @@ class _SplashScreenState extends State<SplashScreen>
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-
                       SizedBox(
                         width: logoSize + 80,
                         height: logoSize + 80,
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-
                             if (_verified)
                               ScaleTransition(
                                 scale: _ringScale,
@@ -299,8 +308,7 @@ class _SplashScreenState extends State<SplashScreen>
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w600,
-                                            color:
-                                                amber.withOpacity(0.5),
+                                            color: amber.withOpacity(0.5),
                                             letterSpacing: 3.0,
                                           ),
                                         ),
@@ -365,13 +373,23 @@ class _BracketPainter extends CustomPainter {
     canvas.drawLine(Offset(size.width - len, 0), Offset(size.width, 0), paint);
     canvas.drawLine(Offset(size.width, 0), Offset(size.width, len), paint);
 
-    canvas.drawLine(Offset(0, size.height - len), Offset(0, size.height), paint);
+    canvas.drawLine(
+      Offset(0, size.height - len),
+      Offset(0, size.height),
+      paint,
+    );
     canvas.drawLine(Offset(0, size.height), Offset(len, size.height), paint);
 
-    canvas.drawLine(Offset(size.width - len, size.height),
-        Offset(size.width, size.height), paint);
-    canvas.drawLine(Offset(size.width, size.height - len),
-        Offset(size.width, size.height), paint);
+    canvas.drawLine(
+      Offset(size.width - len, size.height),
+      Offset(size.width, size.height),
+      paint,
+    );
+    canvas.drawLine(
+      Offset(size.width, size.height - len),
+      Offset(size.width, size.height),
+      paint,
+    );
   }
 
   @override

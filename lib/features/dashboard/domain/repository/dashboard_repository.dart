@@ -6,4 +6,5 @@ abstract class DashboardRepository {
   Future<ProfileModel> getProfile();
   Future<List<DashboardRegistrationModel>> getRegistration();
   Future<List<VehicleModel>> getVehicles();
+  Future<String> getMe();
 }

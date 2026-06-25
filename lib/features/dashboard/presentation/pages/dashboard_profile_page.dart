@@ -253,7 +253,8 @@ class _DashboardProfilePageState extends State<DashboardProfilePage> {
                                 FlutterSecureStorage();
                             await storage.delete(key: 'access_token');
                             await storage.delete(key: 'refresh_token');
-                            Navigator.push(
+                            Navigator.pushAndRemoveUntil(
+                              
                               context,
                               PageRouteBuilder(
                                 pageBuilder: (_, __, ___) => const LoginPage(),
@@ -264,6 +265,7 @@ class _DashboardProfilePageState extends State<DashboardProfilePage> {
                                   );
                                 },
                               ),
+                              (route) => false
                             );
                           },
                           style: OutlinedButton.styleFrom(

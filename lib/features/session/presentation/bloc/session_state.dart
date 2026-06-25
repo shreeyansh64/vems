@@ -11,10 +11,12 @@ enum SessionStatus {
 class SessionState {
   final SessionStatus status;
   final String? error;
+  final String? role;
 
   const SessionState({
     required this.status,
     this.error,
+    this.role
   });
 
   factory SessionState.initial() {
@@ -26,10 +28,12 @@ class SessionState {
   SessionState copyWith({
     SessionStatus? status,
     String? error,
+    String? role
   }) {
     return SessionState(
       status: status ?? this.status,
-      error: error,
+      error: error ?? this.error,
+      role: role ?? this.role
     );
   }
 }
