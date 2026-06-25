@@ -79,6 +79,34 @@ class DocumentUploadPage extends StatelessWidget {
     return BlocConsumer<DocumentBloc, DocumentState>(
       listener: (context, state) {
         if (state.status == DocumentStatus.registrationSubmitted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: const Color(0xFF2E7D32), // Material Green 800
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              margin: const EdgeInsets.all(16),
+              duration: const Duration(seconds: 4),
+              content: Row(
+                children: [
+                  const Icon(Icons.check_circle_rounded, color: Colors.white),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      "Request submitted ! You'll receive an update regarding your request withi 48 hours..",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
           Navigator.push(
             context,
             PageRouteBuilder(
